@@ -1,27 +1,37 @@
 {
-  description = "System Configuration v1";
+  description = "General NIXOS for hyprland configuration v1.1";
+
+  nixConfig = {
+    extra-substituters = [
+      "https://hyprland.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+    ];
+  };
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    home-manager = {
+        url = "github:nix-community/home-manager";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
   };
 
-  outputs = { self, nixpkgs }:
+  outputs =
+    inputs @ { self, nixpkgs, unstable, home-manager, ... }:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
-      lib = nixpkgs.lib;
-      hostname = "nixos";
-    in {
+      host = "nixos";
+      user = "abdul";
+    in
+    {
       nixosConfigurations = {
-        ${hostname} = lib.nixosSystem {
-          inherit system;
-          modules = [ ./configuration.nix ];
-        };
+        import ./hosts {
+          inherit inputs nixpkgs unstable home-manager system host user;  # Inherit Inputs
+        }
       };
-
     };
 }
 
