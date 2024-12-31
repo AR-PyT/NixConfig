@@ -1,21 +1,21 @@
 { 
   inputs, 
   nixpkgs,
-  unstable,
+  nixpkgs-unstable,
   home-manager, 
-  system, 
-  host, 
-  user,
   ...
 }:
 
 let
+  system = (import ../variables.nix).system;
+  host = (import ../variables.nix).host;
+  user = (import ../variables.nix).user;
   pkgs = import nixpkgs {
     inherit system;
     config.allowUnfree = true;
   };
 
-  pkgs-unstable = import unstable {
+  unstable = import nixpkgs-unstable {
     inherit system;
     config.allowUnfree = true;
   };
@@ -23,16 +23,16 @@ let
   lib = nixpkgs.lib;
 in 
 {
-  ${host} = lib.nixosSystem {
+  "${host}" = lib.nixosSystem {
     specialArgs = {
-      inherit pkgs-unstable;
+      inherit unstable;
       inherit system;
       inherit inputs;
       inherit user;
       inherit host;
     };
     modules = [
-      ./config.nix
+      ./config.nix  # Handle basic system configuration
 
       home-manager.nixosModules.home-manager
       {
