@@ -12,5 +12,4 @@
   # Program Options
   browser = "firefox";
   terminal = "kitty";
-  keyboardLayout = "us";
 }

@@ -1,7 +1,7 @@
 { 
   config, 
   pkgs,
-  pkgs-unstable,
+  unstable,
   host,
   user,
   options,
@@ -13,9 +13,11 @@ in
 {
   imports =
     [
-      ./hardware.nix
-      ./users.nix
-      ../modules
+      ../modules/core
+      ../modules/hardware
+      ../modules/programs
+      ../modules/shell
+      ../modules/theming
     ];
 
   boot = {
@@ -103,13 +105,8 @@ in
       vscode # Code Editor
 
       # Video/Audio
-      alsa-utils # Audio Control
       feh # Image Viewer
       mpv # Media Player
-      pavucontrol # Audio Control
-      pipewire # Audio Server/Control
-      pulseaudio # Audio Server/Control
-      qpwgraph # Pipewire Graph Manager
       vlc # Media Player
 
       # Apps
@@ -151,9 +148,6 @@ in
      variant = "";
     };
     xserver.windowManager.i3.enable = true;
-  
-    # NVIDIA drivers
-    xserver.videoDrivers = [ "nvidia" ];
   };
 
 
@@ -184,27 +178,6 @@ in
       text = ''
         auth include login
       '';
-    };
-  };
-
-
-  # Pipewire setup (Sound)
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-  # Bluetooth support
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    hsphfpd.enable = false;
-    settings = {
-      General = {
-        Enable = "Source,Sink,Media,Socket";
-      };
     };
   };
 

@@ -1,6 +1,6 @@
 {
   # Git Configuration ( For Pulling Software Repos )
-  gitUsername = "Abdul Rehman";
+  gitUsername = "Abdul Rehman";  # Also used as full name
   gitEmail = "abrehman.bscs21seecs@seecs.edu.pk";
 
   # Hyprland Settings
