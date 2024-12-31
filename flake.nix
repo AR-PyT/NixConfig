@@ -1,5 +1,5 @@
 {
-  description = "General NIXOS for hyprland configuration v1.1";
+  description = "General NIXOS for hyprland configuration v1.2";
 
   nixConfig = {
     extra-substituters = [
@@ -11,8 +11,9 @@
   };
 
   inputs = {
+    # By default using stable version
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";  # For unstable packages as needed
     home-manager = {
         url = "github:nix-community/home-manager";
         inputs.nixpkgs.follows = "nixpkgs";
@@ -20,16 +21,13 @@
   };
 
   outputs =
-    inputs @ { self, nixpkgs, unstable, home-manager, ... }:
+    inputs @ { self, nixpkgs, nixpkgs-unstable, home-manager, ... }:
     let
-      system = "x86_64-linux";
-      host = "nixos";
-      user = "abdul";
     in
     {
       nixosConfigurations = {
         import ./hosts {
-          inherit inputs nixpkgs unstable home-manager system host user;  # Inherit Inputs
+          inherit inputs nixpkgs nixpkgs-unstable home-manager;  # Inherit Inputs
         }
       };
     };
