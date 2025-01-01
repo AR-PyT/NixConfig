@@ -16,7 +16,7 @@ in
       # ./users.nix
     ] ++
     (import ../modules/core) ++
-    (import ../modules/hardware) ++
+    (import ../modules/hardware);
     # (import ../modules/system) ++
     # (import ../modules/programs) ++
     # (import ../modules/theming);
