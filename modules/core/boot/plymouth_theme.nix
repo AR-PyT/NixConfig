@@ -5,8 +5,9 @@ in
 pkgs.stdenv.mkDerivation rec {
   pname = "theme_v1";
   version = "1.0.0";
-  src = themePath;
-  buildInputs = [ pkgs.plymouth ];
+  src = ./theme_v1.zip;
+  nativeBuildInputs = [ pkgs.unzip ];
+  buildInputs = [ pkgs.unzip pkgs.plymouth ];
 
   installPhase = ''
     mkdir -p $out/share/plymouth/themes/theme_v1

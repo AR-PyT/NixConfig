@@ -1,9 +1,0 @@
-[Plymouth Theme]
-Name=My Plymouth Theme v1
-Description=Ubuntu logo with spinning colored stripes
-ModuleName=script
-
-[script]
-ImageDir=/usr/share/plymouth/themes/theme_v1
-ScriptFile=/usr/share/plymouth/themes/theme_v1/theme_v1.script
-UseFirmwareBackground=false
