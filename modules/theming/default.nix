@@ -1,0 +1,3 @@
+[
+  ./stylixTheme.nix
+]
