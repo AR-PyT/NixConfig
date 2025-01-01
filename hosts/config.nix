@@ -2,6 +2,7 @@
   config, 
   pkgs,
   unstable,
+  unstable,
   host,
   user,
   options,
