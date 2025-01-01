@@ -1,7 +1,5 @@
 # Comment out components you don't need or edit them to fit your needs.
-[
-  ./connectivity.nix
-  ./boot.nix
-  ./display.nix
-  ./security.nix
-]
+(import ./connectivity.nix) ++
+(import ./boot.nix) ++
+(import ./display.nix) ++
+(import ./security.nix)

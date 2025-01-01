@@ -1,5 +1,5 @@
+(import ./utils.nix) ++
 [
-  ./utils.nix
   ./programmingLanguages.nix
   ./systemPrograms.nix
 ]

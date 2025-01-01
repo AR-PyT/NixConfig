@@ -2,7 +2,7 @@
 
 {
   # Enable networking
-  host = (import ../../../variables.nix).host;
+  host = (import ../../../variables.nix).hostname;
   networking.hostName = host;
 
   # Refer to https://man.archlinux.org/man/iwd.config.5 for more information
