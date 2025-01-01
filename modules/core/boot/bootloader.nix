@@ -16,7 +16,7 @@ in
     efi.canTouchEfiVariables = true;
   };
 
-  boot.consoleLogLevel = 3;  # Show logs with level >= 3 (default 4)
+  boot.consoleLogLevel = 10;  # Show logs with level >= 3 (default 4)
   # boot.plymouth = {
   #   enable = true;
   #   font = "${pkgs.jetbrains-mono}/share/fonts/truetype/JetBrainsMono-Regular.ttf";
