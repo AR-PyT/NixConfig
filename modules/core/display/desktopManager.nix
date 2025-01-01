@@ -5,6 +5,9 @@
   programs.hyprland.enable = true;
   # programs.hyprland.packages = pkgs.hyprland.packages.${pkgs.system}.hyprland;
 
+  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.enable = true;
+
   environment = 
     let
       exec = "exec dbus-launch Hyprland";
