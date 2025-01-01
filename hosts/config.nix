@@ -13,13 +13,13 @@ in
 {
   imports =
     [
-      # ./users.nix
+      ./users.nix
     ] ++
     (import ../modules/core) ++
-    (import ../modules/hardware);
-    # (import ../modules/system) ++
-    # (import ../modules/programs) ++
-    # (import ../modules/theming);
+    (import ../modules/hardware) ++
+    (import ../modules/system) ++
+    (import ../modules/programs) ++
+    (import ../modules/theming);
     
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

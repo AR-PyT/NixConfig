@@ -16,11 +16,11 @@ in
     efi.canTouchEfiVariables = true;
   };
 
-  boot.consoleLogLevel = 10;  # Show logs with level >= 3 (default 4)
-  # boot.plymouth = {
-  #   enable = true;
-  #   font = "${pkgs.jetbrains-mono}/share/fonts/truetype/JetBrainsMono-Regular.ttf";
-  #   themePackages = lib.mkForce [ theme_v1 ];
-  #   theme = lib.mkForce "theme_v1";
-  # };
+  boot.consoleLogLevel = 3;  # Show logs with level >= 3 (default 4)
+  boot.plymouth = {
+    enable = true;
+    font = "${pkgs.jetbrains-mono}/share/fonts/truetype/JetBrainsMono-Regular.ttf";
+    themePackages = lib.mkForce [ theme_v1 ];
+    theme = lib.mkForce "theme_v1";
+  };
 }
