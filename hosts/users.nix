@@ -5,7 +5,6 @@ let
 in
 {
   users.users.${uname} = {
-    uid = 1000;
     isNormalUser = true;
     description = "${name}";
     shell = pkgs.fish;

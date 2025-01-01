@@ -6,7 +6,7 @@
   locale = "en_US.UTF-8/UTF-8";
 
   # User Info
-  user = "abdul";
+  user = "abdul124";
   gitUsername = "Abdul Rehman";
   gitEmail = "abrehman.bscs21seecs@seecs.edu.pk";
     
