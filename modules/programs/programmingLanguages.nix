@@ -5,5 +5,6 @@
     (python312Full.withPackages(ps: with ps; [ numpy requests]))
     gcc
     clang
+    cmake
   ];
 }
