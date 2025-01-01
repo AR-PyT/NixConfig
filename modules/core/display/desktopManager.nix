@@ -22,8 +22,6 @@
         XDG_CURRENT_DESKTOP = "Hyprland";
         XDG_SESSION_TYPE = "wayland";
         XDG_SESSION_DESKTOP = "Hyprland";
-        XCURSOR = "Catppuccin-Mocha-Dark-Cursors";
-        XCURSOR_SIZE = 24;
         SDL_VIDEODRIVER = "wayland";
         OZONE_PLATFORM = "wayland";
         WLR_RENDERER_ALLOW_SOFTWARE = 1;

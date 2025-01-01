@@ -20,7 +20,7 @@ in
   boot.plymouth = {
     enable = true;
     font = "${pkgs.jetbrains-mono}/share/fonts/truetype/JetBrainsMono-Regular.ttf";
-    themePackages = [ theme_v1 ];
-    theme = "theme_v1";
+    themePackages = lib.mkForce [ theme_v1 ];
+    theme = lib.mkForce "theme_v1";
   };
 }
