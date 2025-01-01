@@ -1,11 +1,12 @@
-{ pkgs, pkgs-unstable, ... }:
+{ lib, config, pkgs, pkgs-unstable, ... }:
 let
   terminal = (import ../../variables.nix).terminal;
   browser = (import ../../variables.nix).browser;
+  user = (import ../../variables.nix).user;
 in
 {
   environment.systemPackages = with pkgs; [
-    ${terminal}
+    "${terminal}"
     fish # Terminal Emulator
     btop # Resource Manager
     git # Version Control
@@ -28,7 +29,7 @@ in
 
     # Apps
     appimage-run # Runs AppImages on NixOS
-    ${browser} # Browser
+    "${browser}" # Browser
     remmina # XRDP & VNC Client
 
     # File Management

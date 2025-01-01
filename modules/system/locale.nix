@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, options, ... }:
 let
   locale = (import ../../variables.nix).locale;
   timezone = (import ../../variables.nix).timezone;

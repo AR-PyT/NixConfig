@@ -3,7 +3,7 @@
 {
   services.displayManager.defaultSession = "hyprland";
   programs.hyprland.enable = true;
-  programs.hyprland.packages = hyprland.packages.${pkgs.system}.hyprland;
+  # programs.hyprland.packages = pkgs.hyprland.packages.${pkgs.system}.hyprland;
 
   environment = 
     let
@@ -52,7 +52,7 @@
         hyprpicker
         hyprlock
         hypridle
-      ]
+      ];
     };
 
     # Portals

@@ -1,12 +1,5 @@
 { pkgs, ... }:
-let
-  stylix.url = "github:danth/stylix";
-in
 {
-  modules = [
-    stylix.nixosModules.stylix
-  ];
-  
   stylix = {
     enable = true;
     image = ./hyprland_default.jpg;
