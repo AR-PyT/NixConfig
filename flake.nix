@@ -25,11 +25,11 @@
     let
     in
     {
-      nixosConfigurations = {
+      nixosConfigurations = (
         import ./hosts {
           inherit inputs nixpkgs nixpkgs-unstable home-manager;  # Inherit Inputs
         }
-      };
+      );
     };
 }
 
