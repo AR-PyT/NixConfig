@@ -3,10 +3,10 @@
 {
   boot = {
 # Make /tmp a tmpfs
-    tmp = {
-      cleanOnBoot = true;
-      tmpfsSize = "5GB";
-    };
+    # tmp = {
+    #   cleanOnBoot = true;
+    #   tmpfsSize = "5GB";
+    # };
     # Appimage Support
     binfmt.registrations.appimage = {
       wrapInterpreterInShell = false;
