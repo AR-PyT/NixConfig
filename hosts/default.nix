@@ -8,7 +8,7 @@
 
 let
   system = (import ../variables.nix).system;
-  host = (import ../variables.nix).host;
+  host = (import ../variables.nix).hostname;
   user = (import ../variables.nix).user;
   pkgs = import nixpkgs {
     inherit system;
