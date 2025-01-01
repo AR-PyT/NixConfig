@@ -2,5 +2,6 @@
 (import ./connectivity.nix) ++
 (import ./boot.nix) ++
 (import ./display.nix) ++
-(import ./security.nix) ++
-[]
+[
+  ./security.nix
+]
