@@ -1,4 +1,4 @@
-{ lib, pkgs,  ... }:
+{ lib, pkgs, unstable,  ... }:
 let
   theme_v1 = import ./plymouth_theme.nix { inherit lib pkgs; };
 in

@@ -1,5 +1,6 @@
 {
   # System
+  system = "x86_64-linux";
   hostname = "nixos";
   timezone = "Asia/Hong_Kong";
   locale = "en_US.UTF-8";
