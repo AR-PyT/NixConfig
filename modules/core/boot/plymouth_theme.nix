@@ -5,7 +5,8 @@ pkgs.stdenv.mkDerivation rec {
   version = "1.0.0";
 
   src = pkgs.fetchgit {
-    url = "git@abdul/AR-PyT/NixConfig.git?ref=plymouth-custom-theme";
+    url = "git@abdul/AR-PyT/NixConfig.git";
+    rev = "00a306cc1f76e1d26d4ce986b08645a5bbd28249";
     sha256 = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
   };
 
