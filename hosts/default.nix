@@ -32,7 +32,7 @@ in
       inherit host;
     };
     modules = [
-      stylix.nixosModules.stylix
+      inputs.stylix.nixosModules.stylix
       ./config.nix  # Handle basic system configuration
 
       home-manager.nixosModules.home-manager

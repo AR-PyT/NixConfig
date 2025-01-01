@@ -22,7 +22,7 @@
     pamixer
     alsa-utils
     pavucontrol
-    pupewire
+    pipewire
     qpwgraph
   ];
 }

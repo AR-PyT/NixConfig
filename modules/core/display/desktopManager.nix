@@ -24,7 +24,6 @@
         XDG_SESSION_DESKTOP = "Hyprland";
         XCURSOR = "Catppuccin-Mocha-Dark-Cursors";
         XCURSOR_SIZE = 24;
-        NIXOS_OZONE_WL = 1;
         SDL_VIDEODRIVER = "wayland";
         OZONE_PLATFORM = "wayland";
         WLR_RENDERER_ALLOW_SOFTWARE = 1;
