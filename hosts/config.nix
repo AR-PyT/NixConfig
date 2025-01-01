@@ -14,12 +14,12 @@ in
   imports =
     [
       ./users.nix
-      ../modules/core
-      ../modules/hardware
-      ../modules/system
-      ../modules/programs
-      ../modules/theming
-    ];
+    ] ++
+    (import ../modules/core) ++
+    (import ../modules/hardware) ++
+    (import ../modules/system) ++
+    (import ../modules/programs) ++
+    (import ../modules/theming);
     
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
