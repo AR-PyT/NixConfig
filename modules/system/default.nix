@@ -1,4 +1,0 @@
-[
-  ./fonts.nix
-  ./locale.nix
-]
