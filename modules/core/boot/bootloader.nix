@@ -13,17 +13,16 @@ in
       configurationLimit = 5;  # Limit NIXOS configs
 
       theme = lib.mkForce (pkgs.stdenv.mkDerivation {
-        pname = "distro-grub-themes";
-        version = "3.1";
+        pname = "arknight_theme";
+        version = "1.1";
         src = pkgs.fetchFromGitHub {
-          owner = "AdisonCavani";
-          repo = "distro-grub-themes";
-          rev = "v3.1";
-          hash = "sha256-ZcoGbbOMDDwjLhsvs77C7G7vINQnprdfI37a9ccrmPs=";
+          owner = "Shelton786";
+          repo = "Grub-Themes-Arknights_Priestess";
+          rev = "main";
+          hash = lib.fakeSha256;
         };
-        installPhase = "cp -r customize/nixos $out";
+        installPhase = "cp -r Arknights_Priestess $out";
       });
-
     };
     timeout = 3;
     efi.canTouchEfiVariables = true;
@@ -35,6 +34,6 @@ in
     enable = true;
     font = "${pkgs.jetbrains-mono}/share/fonts/truetype/JetBrainsMono-Regular.ttf";
     themePackages = lib.mkForce [ theme_v1 ];
-    theme = lib.mkForce "theme_v1";
+    theme = lib.mkForce "spinner";
   };
 }
