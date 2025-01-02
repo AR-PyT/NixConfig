@@ -12,7 +12,7 @@ in
       useOSProber = true;
       configurationLimit = 5;  # Limit NIXOS configs
 
-      theme = pkgs.stdenv.mkDerivation {
+      theme = libmkForce pkgs.stdenv.mkDerivation {
         pname = "distro-grub-themes";
         version = "3.1";
         src = pkgs.fetchFromGitHub {
