@@ -19,7 +19,7 @@ in
           owner = "Shelton786";
           repo = "Grub-Themes-Arknights_Priestess";
           rev = "main";
-          hash = "sha256-ZcoGbbOMDDwjLhsvs77C7G7vINQnprdfI37a9ccrmPs=";
+          hash = "sha256-jwxfd494Hii/fdC0xSSBxO7M21DlXfU/9rFByhmfH4M=";
         };
         installPhase = "cp -r Arknights_Priestess $out";
       });

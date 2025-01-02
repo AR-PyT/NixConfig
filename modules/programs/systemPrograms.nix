@@ -21,6 +21,7 @@ in
     wget # Retriever
     xdg-utils # Environment integration
     vscode # Code Editor
+    direnv # directory
 
     # Video/Audio
     feh # Image Viewer
