@@ -7,8 +7,6 @@ in
   home.homeDirectory = "/home/${user}";
   home.stateVersion = "24.11";
 
-  programs.fish.enable = true;
-
   programs.git = {
     enable = true;
     userName = "${gitUsername}";

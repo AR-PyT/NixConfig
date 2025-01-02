@@ -3,6 +3,7 @@ let
   inherit (import ../variables.nix) gitUsername;
 in
 {
+  programs.fish.enable = true;
   users.users.${user} = {
     isNormalUser = true;
     description = "${gitUsername}";
