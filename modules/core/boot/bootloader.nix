@@ -12,7 +12,7 @@ in
       useOSProber = true;
       configurationLimit = 5;  # Limit NIXOS configs
 
-      theme = lib.mkForce pkgs.stdenv.mkDerivation {
+      theme = lib.mkForce (pkgs.stdenv.mkDerivation {
         pname = "distro-grub-themes";
         version = "3.1";
         src = pkgs.fetchFromGitHub {
@@ -22,7 +22,7 @@ in
           hash = "sha256-ZcoGbbOMDDwjLhsvs77C7G7vINQnprdfI37a9ccrmPs=";
         };
         installPhase = "cp -r customize/nixos $out";
-      };
+      });
 
     };
     timeout = 3;
