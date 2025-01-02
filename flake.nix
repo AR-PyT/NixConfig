@@ -14,7 +14,7 @@
     {
       nixosConfigurations = (
         import ./hosts {
-          inherit inputs nixpkgs nixpkgs-unstable stylix;  # Inherit Inputs
+          inherit inputs nixpkgs nixpkgs-unstable;  # Inherit Inputs
         }
       );
     };

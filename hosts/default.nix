@@ -2,7 +2,6 @@
   inputs, 
   nixpkgs,
   nixpkgs-unstable,
-  stylix,
   ...
 }:
 
