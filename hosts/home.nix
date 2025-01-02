@@ -1,4 +1,4 @@
-{ pkgs, home-manager, ... }:
+{ pkgs, ... }:
 let
   inherit (import ../variables.nix) gitUsername gitEmail user;
 in
@@ -7,7 +7,8 @@ in
   home.homeDirectory = "/home/${user}";
   home.stateVersion = "24.11";
 
-  programs.home-manager.enable = true;
+  programs.fish.enable = true;
+
   programs.git = {
     enable = true;
     userName = "${gitUsername}";

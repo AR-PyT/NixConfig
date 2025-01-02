@@ -2,13 +2,12 @@
   config, 
   pkgs,
   unstable,
-  host,
+  hostname,
   user,
   options,
   ... 
 }:
 let
-  inherit (import ./variables.nix) keyboardLayout;
 in
 {
   imports =

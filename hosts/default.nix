@@ -2,14 +2,16 @@
   inputs, 
   nixpkgs,
   nixpkgs-unstable,
-  home-manager, 
+  stylix,
   ...
 }:
 
 let
-  system = (import ../variables.nix).system;
-  host = (import ../variables.nix).hostname;
-  user = (import ../variables.nix).user;
+  inherit (import ../variables.nix)
+    system
+    hostname
+    user
+  ;
   pkgs = import nixpkgs {
     inherit system;
     config.allowUnfree = true;
@@ -23,25 +25,17 @@ let
   lib = nixpkgs.lib;
 in 
 {
-  "${host}" = lib.nixosSystem {
+  "${hostname}" = lib.nixosSystem {
     specialArgs = {
       inherit unstable;
       inherit system;
       inherit inputs;
       inherit user;
-      inherit host;
+      inherit hostname;
     };
     modules = [
       inputs.stylix.nixosModules.stylix
       ./config.nix  # Handle basic system configuration
-
-      home-manager.nixosModules.home-manager
-      {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.backupFileExtension = "backup";
-        home-manager.users.${user} = import ./home.nix;
-      }
     ];
   };
 }

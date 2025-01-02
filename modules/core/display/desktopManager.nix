@@ -20,8 +20,6 @@
       '';
 
       variables = {
-        # WLR_NO_HARDWARE_CURSORS="1"; # Needed for VM
-        # WLR_RENDERER_ALLOW_SOFTWARE="1";
         XDG_CURRENT_DESKTOP = "Hyprland";
         XDG_SESSION_TYPE = "wayland";
         XDG_SESSION_DESKTOP = "Hyprland";

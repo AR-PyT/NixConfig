@@ -2,7 +2,7 @@
 
 {
   environment.systemPackages = with pkgs; [
-    python311
+    python312
     gcc
     clang
     cmake

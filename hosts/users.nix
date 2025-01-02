@@ -1,12 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, user, ... }:
 let
-  uname = (import ../variables.nix).user;
-  name = (import ../variables.nix).gitUsername;
+  inherit (import ../variables.nix) gitUsername;
 in
 {
-  users.users.${uname} = {
+  users.users.${user} = {
     isNormalUser = true;
-    description = "${name}";
+    description = "${gitUsername}";
     shell = pkgs.fish;
     extraGroups = [ "networkmanager" "wheel" "lp" "scanner" "audio" "video" ];
     packages = with pkgs; [];

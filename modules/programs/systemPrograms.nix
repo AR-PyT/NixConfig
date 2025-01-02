@@ -5,7 +5,6 @@ let
   user = (import ../../variables.nix).user;
 in
 {
-  programs.fish.enable = true;
   environment.systemPackages = with pkgs; [
     pkgs.${terminal}
     fish # Terminal Emulator
