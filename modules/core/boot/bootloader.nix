@@ -13,15 +13,15 @@ in
       configurationLimit = 5;  # Limit NIXOS configs
 
       theme = lib.mkForce (pkgs.stdenv.mkDerivation {
-        pname = "arknight_theme";
+        pname = "KawaiiGRUB";
         version = "1.1";
         src = pkgs.fetchFromGitHub {
-          owner = "Shelton786";
-          repo = "Grub-Themes-Arknights_Priestess";
-          rev = "main";
+          owner = "Gabbar-v7";
+          repo = "KawaiiGRUB";
+          rev = "master";
           hash = "sha256-jwxfd494Hii/fdC0xSSBxO7M21DlXfU/9rFByhmfH4M=";
         };
-        installPhase = "cp -r Arknights_Priestess $out";
+        installPhase = "cp -r kawaii-grub-theme $out";
       });
     };
     timeout = 3;
