@@ -4,15 +4,15 @@ let
         pname = "PlymouthTheme";
         version = "1.1";
         src = pkgs.fetchFromGitHub {
-          owner = "yi78";
-          repo = "hellonavi";
+          owner = "HerbFargus";
+          repo = "plymouth-themes";
           rev = "master";
-          hash = "sha256-0A79TB2fEDJ3O8pU/+aIFYuFtuGUBj5eYYjWK5IwF4A";
+          hash = "sha256-0A79TB2fEDJaO8pU/+aIFYuFtuGUBj5eYYjWK5IwF4A";
         };
         buildInputs = [ pkgs.plymouth ];
         installPhase = ''
           mkdir -p $out/share/plymouth/themes/hellonavi
-          cp -r hellonavi/* $out/share/plymouth/themes/hellonavi
+          cp -r eionix-cat/* $out/share/plymouth/themes/hellonavi
         '';
       };
 in
