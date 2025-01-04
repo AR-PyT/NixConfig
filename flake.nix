@@ -8,10 +8,10 @@
     home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     stylix.url = "github:danth/stylix";
-    # fine-cmdline = {
-    #   url = "github:VonHeikemen/fine-cmdline.nvim";
-    #   flake = false;
-    # };
+    fine-cmdline = {
+      url = "github:VonHeikemen/fine-cmdline.nvim";
+      flake = false;
+    };
   };
 
   outputs =

@@ -32,15 +32,14 @@ in
     ".config/emoji" = {
       source = config.lib.file.mkOutOfStoreSymlink "${configPath}/emoji";
     };
-    ".config/hypr" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${configPath}/hypr";
-      recursive = true;
+    ".config/hypr/macchiato.conf" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${configPath}/hypr/macchiato.conf";
     };
     ".config/fish" = {
       source = config.lib.file.mkOutOfStoreSymlink "${configPath}/fish";
       recursive = true;
     };
-  }
+  };
 
   # Place Files Inside Home Directory
   home.file."Pictures/Wallpapers" = {

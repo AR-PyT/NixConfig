@@ -84,7 +84,7 @@ in
   time.timeZone = "Asia/Hong_Kong";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8/UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
     LANGUAGE = "en_US.UTF-8";
@@ -208,7 +208,7 @@ in
     hyprcursor
     hyprcursor
     wl-clipboard
-    wlr-rand
+    wlr-randr
     xwayland
     hyprpicker
     hyprlock
@@ -220,7 +220,7 @@ in
     smartmontools
     xdg-utils
     killall
-    lm-sensors
+    lm_sensors
     libnotify
     lxqt.lxqt-policykit
     swww
@@ -280,7 +280,7 @@ in
   fonts = {
     packages = with pkgs; [
       noto-fonts-emoji
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       nerd-font-patcher
       font-awesome
       symbola
@@ -442,8 +442,6 @@ in
     enable = true;
     enable32Bit = false;
   };
-
-  console.keyMap = "${keyboardLayout}";
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

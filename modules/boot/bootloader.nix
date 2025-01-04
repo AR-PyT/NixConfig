@@ -7,12 +7,12 @@ let
           owner = "yi78";
           repo = "hellonavi";
           rev = "master";
-          hash = "sha256-chddGFLnJ6Ncskhr9mAWhgA7G+zNSgBNEV/Qkt44YcQ=";
+          hash = "sha256-0A79TB2fEDJ3O8pU/+aIFYuFtuGUBj5eYYjWK5IwF4A";
         };
         buildInputs = [ pkgs.plymouth ];
         installPhase = ''
-          mkdir -p $out/share/plymouth/themes/plymouth_custom_theme
-          cp -r hellonavi/* $out/share/plymouth/themes/plymouth_custom_theme
+          mkdir -p $out/share/plymouth/themes/hellonavi
+          cp -r hellonavi/* $out/share/plymouth/themes/hellonavi
         '';
       };
 in
@@ -33,9 +33,9 @@ in
           owner = "13atm01";
           repo = "GRUB-Theme";
           rev = "master";
-          hash = "sha256-chddGFLnJ6Ncskhr9mAWhgA7G+zNSgBNEV/Qkt44YcQ=";
+          hash = "sha256-4aW8IEkIFC3IZ/GdC2xLrFyDvbnBEvFyFHB4gsZxmWE=";
         };
-        installPhase = "cp -r Doki\ Doki\ Literature\ Club\ (Chibi\ Version)/Chibi-DDLC-Version $out";
+        installPhase = "cp -r \"Doki Doki Literature Club (Chibi Version)/Chibi-DDLC-Version\" $out";
       });
     };
     timeout = 3;
