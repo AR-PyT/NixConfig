@@ -1,29 +1,32 @@
 {
-  description = "ZaneyOS";
+  description = "General NIXOS for hyprland configuration v2.1";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/master";
+    # By default will use the stable verson (24.11)
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable"; 
+    home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     stylix.url = "github:danth/stylix";
-    fine-cmdline = {
-      url = "github:VonHeikemen/fine-cmdline.nvim";
-      flake = false;
-    };
+    # fine-cmdline = {
+    #   url = "github:VonHeikemen/fine-cmdline.nvim";
+    #   flake = false;
+    # };
   };
 
   outputs =
-    { nixpkgs, home-manager, ... }@inputs:
+    { nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
     let
-      system = "aarch64-linux";
-      host = "nixbook";
-      username = "zaney";
+      system = "x86_64-linux";
+      host = "nixos";
+      username = "abdul";
     in
     {
       nixosConfigurations = {
         "${host}" = nixpkgs.lib.nixosSystem {
           specialArgs = {
-	    inherit system;
+            inherit (nixpkgs) lib;
+	          inherit system;
             inherit inputs;
             inherit username;
             inherit host;
@@ -31,8 +34,7 @@
           modules = [
             ./hosts/${host}/config.nix
             inputs.stylix.nixosModules.stylix
-            home-manager.nixosModules.home-manager
-            {
+            home-manager.nixosModules.home-manager {
               home-manager.extraSpecialArgs = {
                 inherit username;
                 inherit inputs;
