@@ -20,304 +20,189 @@ with lib;
     enable = true;
     xwayland.enable = true;
     systemd.enable = true;
-    extraConfig =''
-    monitor=,preferred,auto,1
-
-    # See https://wiki.hyprland.org/Configuring/Keywords/ for more
-
-    # Execute your favorite apps at launch
-    exec-once = fish -c autostart
-    exec-once = dbus-update-activation-environment --systemd --all
-    exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-    exec-once = killall -q swww;sleep .5 && swww init
-    exec-once = killall -q waybar;sleep .5 && waybar
-    exec-once = killall -q swaync;sleep .5 && swaync
-    exec-once = nm-applet --indicator
-    exec-once = lxqt-policykit-agent
-    exec-once = sleep 1.5 && swww img /home/abdul/Pictures/Wallpapers/beautifulmountainscape.jpg
-
-    # Source a file (multi-file configs)
-    source = ~/.config/hypr/macchiato.conf
-
-    # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
-    input {
-        kb_layout = us
-        kb_variant =
-        kb_model =
-        kb_options = terminate:ctrl_alt_bksp
-        kb_rules =
-
-        follow_mouse = 1
-        
-        touchpad {
-            natural_scroll = yes
-            tap-and-drag = true
-        }
-
-        sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
-    }
-
-    # XWayland disable scaling
-    # xwayland {
-    #     force_zero_scaling = true
-    # }
-
-    # env = GDK_SCALE, 1.6
-    env = HYPRCURSOR_THEME,Catppuccin-Macchiato-Teal
-    env = HYPRCURSOR_SIZE,24
-    env = XCURSOR_THEME,Catppuccin-Macchiato-Teal
-    env = XCURSOR_SIZE,24
-
-    general {
-        # See https://wiki.hyprland.org/Configuring/Variables/ for more
-
-        gaps_in = 5
-        gaps_out = 10
-        border_size = 2
-        col.active_border = $teal
-        col.inactive_border = $surface1
-
-        layout = dwindle
-    }
-
-    decoration {
-        # See https://wiki.hyprland.org/Configuring/Variables/ for more
-
-        rounding = 10
-
-        blur {
-            size = 8
-            passes = 2
-        }
-
-        shadow {
-            enabled = true
-            range = 15
-            render_power = 3
-            offset = 0, 0
-            color = $teal
-            color_inactive = 0xff$baseAlpha
-        }
-        
-        active_opacity = 0.7
-        inactive_opacity = 0.7
-        fullscreen_opacity = 0.7
-    }
-
-    # layerrule = blur, waybar
-
-    animations {
-        enabled = yes
-
-        # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
-
-        bezier = myBezier, 0.05, 0.9, 0.1, 1.05
-
-        animation = windows, 1, 2, myBezier
-        animation = windowsOut, 1, 2, default, popin 80%
-        animation = border, 1, 3, default
-        animation = fade, 1, 2, default
-        animation = workspaces, 1, 1, default
-    }
-
-    dwindle {
-        # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-        pseudotile = yes # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
-        preserve_split = yes # you probably want this
-        smart_split = true
-    }
-
-    master {
-        # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-        new_status = master
-    }
-
-    gestures {
-        # See https://wiki.hyprland.org/Configuring/Variables/ for more
-        workspace_swipe = on
-    }
-
-    misc {
-        disable_hyprland_logo = true
-        disable_splash_rendering = true
-        background_color = 0x24273a
-    }
-
-    binds {
-        workspace_back_and_forth = true
-    }
-
-    # Example per-device config
-    # See https://wiki.hyprland.org/Configuring/Keywords/#executing for more
-    device {
-        name = epic mouse V1
-        sensitivity = -0.5
-    }
-
-    # Example windowrule v1
-    # windowrule = float, ^(kitty)$
-    windowrule = opaque, brave
-    windowrule = float, imv
-    windowrule = opaque, imv
-    windowrule = float, title:(Media viewer)
-    windowrule = opaque, title:(Media viewer)
-    windowrule = opaque, title:(YouTube Music)
-    windowrule = opaque, title:(qutebrowser)
-    windowrule = opaque, title:(Slack)
-    windowrule = opaque, telegram
-    windowrule = float, mpv
-    windowrule = opaque, mpv
-    windowrule = opaque, swappy
-    windowrule = center 1, swappy
-    windowrule = stayfocused, swappy
-    # windowrule = size 50% 50%, mpv
-    # Example windowrule v2
-    # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
-    # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
-
-    # See https://wiki.hyprland.org/Configuring/Keywords/ for more
-    $mainMod = SUPER
-
-    # will switch to a submap called resize
-    bind=$mainMod ALT,R,submap,resize
-
-    # will start a submap called "resize"
-    submap=resize
-
-    # sets repeatable binds for resizing the active window
-    binde=,l,resizeactive,10 0
-    binde=,h,resizeactive,-10 0
-    binde=,k,resizeactive,0 -10
-    binde=,j,resizeactive,0 10
-
-    # use reset to go back to the global submap
-    bind=,escape,submap,reset 
-
-    # will reset the submap, meaning end the current one and return to the global one
-    submap=reset
-
-    # will switch to a submap called move
-    bind=$mainMod ALT,M,submap,move
-
-    # will start a submap called "move"
-    submap=move
-
-    # sets repeatable binds for moving the active window
-    bind=,l,movewindow,r
-    bind=,h,movewindow,l
-    bind=,k,movewindow,u
-    bind=,j,movewindow,d
-
-    # use reset to go back to the global submap
-    bind=,escape,submap,reset 
-
-    # will reset the submap, meaning end the current one and return to the global one
-    submap=reset
-
-    # keybinds further down will be global again...
-
-    # Scrachpads
-    bind = $mainMod CTRL, T, exec, pypr toggle term
-    $dropterm  = ^(wezterm_dropdown)$
-    windowrule = float, $dropterm
-
-    bind = $mainMod CTRL, V, exec, pypr toggle volume
-    $volume_sidemenu = ^(pavucontrol)$
-    windowrule = float, $volume_sidemenu 
-
-    # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-    bind = $mainMod CTRL, M, togglespecialworkspace, minimized
-    bind = $mainMod, M, exec, pypr toggle_special minimized
-    bind = $mainMod CTRL, E, exec, pypr expose
-    bind = $mainMod, Z, exec, pypr zoom
-
-    bind = $mainMod, T, exec, wezterm start --always-new-process
-    bind = $mainMod SHIFT, T, exec, telegram-desktop
-    bind = $mainMod, B, exec, qutebrowser
-    bind = $mainMod SHIFT, B, exec, brave
-    bind = $mainMod, F, exec, thunar
-    bind = $mainMod, S, exec, spotify
-    bind = $mainMod, Y, exec, youtube-music
-    bind = $mainMod, D, exec, rofi -show drun
-    bind = $mainMod SHIFT, D, exec, firejail --apparmor discord
-    bind = $mainMod, ESCAPE, exec, fish -c wlogout_uniqe
-    bind = $mainMod SHIFT, L, exec, hyprlock
-    bind = $mainMod SHIFT, S, exec, fish -c screenshot_to_clipboard
-    bind = $mainMod, E, exec, fish -c screenshot_edit
-    bind = $mainMod SHIFT, R, exec, fish -c record_screen_gif
-    bind = $mainMod, R, exec, fish -c record_screen_mp4
-    bind = $mainMod, V, exec, fish -c clipboard_to_type
-    bind = $mainMod SHIFT, V, exec, fish -c clipboard_to_wlcopy
-    bind = $mainMod, X, exec, fish -c clipboard_delete_item
-    bind = $mainMod SHIFT, X, exec, fish -c clipboard_clear
-    bind = $mainMod, U, exec, fish -c bookmark_to_type
-    bind = $mainMod SHIFT, U, exec, fish -c bookmark_add
-    bind = $mainMod CTRL, U, exec, fish -c bookmark_delete
-    bind = $mainMod, C, exec, hyprpicker -a
-    bind = $mainMod SHIFT, C, exec, pypr menu "Color picker"
-    bind = $mainMod SHIFT, Q, killactive
-    bind = $mainMod SHIFT, F, togglefloating, 
-    bind = $mainMod CTRL, F, fullscreen, 0
-    bind = $mainMod SHIFT, P, pseudo, # dwindle
-    bind = $mainMod SHIFT, O, togglesplit, # dwindle
-    bind = $mainMod ALT, M, exit,
-
-    bind = $mainMod SHIFT, A, exec, fish -c airplane_mode_toggle
-    bind = $mainMod SHIFT, N, exec, dunstctl set-paused toggle
-    bind = $mainMod SHIFT, Y, exec, fish -c bluetooth_toggle
-    bind = $mainMod SHIFT, W, exec, fish -c wifi_toggle
-
-    bind = $mainMod, p, exec, playerctl play-pause
-    bind = $mainMod, bracketright, exec, playerctl next
-    bind = $mainMod, bracketleft, exec, playerctl previous
-
-    bind = , XF86AudioRaiseVolume, exec, volumectl -u up
-    bind = , XF86AudioLowerVolume, exec, volumectl -u down
-    bind = , XF86AudioMute, exec, volumectl toggle-mute
-    bind = , XF86AudioMicMute, exec, volumectl -m toggle-mute
-
-    bind = , XF86MonBrightnessUp, exec, lightctl up
-    bind = , XF86MonBrightnessDown, exec, lightctl down
-
-    # Move focus with mainMod + arrow keys
-    bind = $mainMod, h, movefocus, l
-    bind = $mainMod, l, movefocus, r
-    bind = $mainMod, k, movefocus, u
-    bind = $mainMod, j, movefocus, d
-    bind = $mainMod, Tab, cyclenext,
-    bind = $mainMod, Tab, bringactivetotop,
-
-    # Switch workspaces with mainMod + [0-9]
-    bind = $mainMod, 1, workspace, 1
-    bind = $mainMod, 2, workspace, 2
-    bind = $mainMod, 3, workspace, 3
-    bind = $mainMod, 4, workspace, 4
-    bind = $mainMod, 5, workspace, 5
-    bind = $mainMod, 6, workspace, 6
-    bind = $mainMod, 7, workspace, 7
-    bind = $mainMod, 8, workspace, 8
-    bind = $mainMod, 9, workspace, 9
-    bind = $mainMod, 0, workspace, 10
-
-    # Move active window to a workspace with mainMod + SHIFT + [0-9]
-    bind = $mainMod SHIFT, 1, movetoworkspace, 1
-    bind = $mainMod SHIFT, 2, movetoworkspace, 2
-    bind = $mainMod SHIFT, 3, movetoworkspace, 3
-    bind = $mainMod SHIFT, 4, movetoworkspace, 4
-    bind = $mainMod SHIFT, 5, movetoworkspace, 5
-    bind = $mainMod SHIFT, 6, movetoworkspace, 6
-    bind = $mainMod SHIFT, 7, movetoworkspace, 7
-    bind = $mainMod SHIFT, 8, movetoworkspace, 8
-    bind = $mainMod SHIFT, 9, movetoworkspace, 9
-    bind = $mainMod SHIFT, 0, movetoworkspace, 10
-
-    # Scroll through existing workspaces with mainMod + scroll
-    bind = $mainMod, mouse_down, workspace, e+1
-    bind = $mainMod, mouse_up, workspace, e-1
-
-    # Move/resize windows with mainMod + LMB/RMB and dragging
-    bindm = $mainMod, mouse:272, movewindow
-    bindm = $mainMod, mouse:273, resizewindow
-    '';
+    extraConfig =
+      let
+        modifier = "SUPER";
+      in
+      concatStrings [
+        ''
+          env = NIXOS_OZONE_WL, 1
+          env = NIXPKGS_ALLOW_UNFREE, 1
+          env = XDG_CURRENT_DESKTOP, Hyprland
+          env = XDG_SESSION_TYPE, wayland
+          env = XDG_SESSION_DESKTOP, Hyprland
+          env = GDK_BACKEND, wayland, x11
+          env = CLUTTER_BACKEND, wayland
+          env = QT_QPA_PLATFORM=wayland;xcb
+          env = QT_WAYLAND_DISABLE_WINDOWDECORATION, 1
+          env = QT_AUTO_SCREEN_SCALE_FACTOR, 1
+          env = SDL_VIDEODRIVER, x11
+          env = MOZ_ENABLE_WAYLAND, 1
+          exec-once = dbus-update-activation-environment --systemd --all
+          exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+          exec-once = killall -q swww;sleep .5 && swww init
+          exec-once = killall -q waybar;sleep .5 && waybar
+          exec-once = killall -q swaync;sleep .5 && swaync
+          exec-once = nm-applet --indicator
+          exec-once = lxqt-policykit-agent
+          exec-once = sleep 1.5 && swww img /home/${username}/Pictures/Wallpapers/beautifulmountainscape.jpg
+          monitor=,preferred,auto,1
+          ${extraMonitorSettings}
+          general {
+            gaps_in = 6
+            gaps_out = 8
+            border_size = 2
+            layout = dwindle
+            resize_on_border = true
+            col.active_border = rgb(${config.stylix.base16Scheme.base08}) rgb(${config.stylix.base16Scheme.base0C}) 45deg
+            col.inactive_border = rgb(${config.stylix.base16Scheme.base01})
+          }
+          input {
+            kb_layout = ${keyboardLayout}
+            kb_options = grp:alt_shift_toggle
+            kb_options = caps:super
+            follow_mouse = 1
+            touchpad {
+              natural_scroll = true
+              disable_while_typing = true
+              scroll_factor = 0.8
+            }
+            sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+            accel_profile = flat
+          }
+          windowrule = noborder,^(wofi)$
+          windowrule = center,^(wofi)$
+          windowrule = center,^(steam)$
+          windowrule = float, nm-connection-editor|blueman-manager
+          windowrule = float, swayimg|vlc|Viewnior|pavucontrol
+          windowrule = float, nwg-look|qt5ct|mpv
+          windowrule = float, zoom
+          windowrulev2 = stayfocused, title:^()$,class:^(steam)$
+          windowrulev2 = minsize 1 1, title:^()$,class:^(steam)$
+          windowrulev2 = opacity 0.9 0.7, class:^(Brave)$
+          windowrulev2 = opacity 0.9 0.7, class:^(thunar)$
+          gestures {
+            workspace_swipe = true
+            workspace_swipe_fingers = 3
+          }
+          misc {
+            initial_workspace_tracking = 0
+            mouse_move_enables_dpms = true
+            key_press_enables_dpms = false
+          }
+          animations {
+            enabled = yes
+            bezier = wind, 0.05, 0.9, 0.1, 1.05
+            bezier = winIn, 0.1, 1.1, 0.1, 1.1
+            bezier = winOut, 0.3, -0.3, 0, 1
+            bezier = liner, 1, 1, 1, 1
+            animation = windows, 1, 6, wind, slide
+            animation = windowsIn, 1, 6, winIn, slide
+            animation = windowsOut, 1, 5, winOut, slide
+            animation = windowsMove, 1, 5, wind, slide
+            animation = border, 1, 1, liner
+            animation = fade, 1, 10, default
+            animation = workspaces, 1, 5, wind
+          }
+          decoration {
+            rounding = 10
+            drop_shadow = true
+            shadow_range = 4
+            shadow_render_power = 3
+            col.shadow = rgba(1a1a1aee)
+            blur {
+                enabled = true
+                size = 5
+                passes = 3
+                new_optimizations = on
+                ignore_opacity = off
+            }
+          }
+          plugin {
+            hyprtrails {
+            }
+          }
+          dwindle {
+            pseudotile = true
+            preserve_split = true
+          }
+          bind = ${modifier},Return,exec,${terminal}
+          bind = ${modifier}SHIFT,Return,exec,rofi-launcher
+          bind = ${modifier}SHIFT,W,exec,web-search
+          bind = ${modifier}ALT,W,exec,wallsetter
+          bind = ${modifier}SHIFT,N,exec,swaync-client -rs
+          bind = ${modifier},W,exec,${browser}
+          bind = ${modifier},E,exec,emopicker9000
+          bind = ${modifier},S,exec,screenshootin
+          bind = ${modifier},D,exec,discord
+          bind = ${modifier},O,exec,obs
+          bind = ${modifier},C,exec,hyprpicker -a
+          bind = ${modifier},G,exec,gimp
+          bind = ${modifier}SHIFT,G,exec,godot4
+          bind = ${modifier},T,exec,thunar
+          bind = ${modifier},M,exec,spotify
+          bind = ${modifier},Q,killactive,
+          bind = ${modifier},P,pseudo,
+          bind = ${modifier}SHIFT,I,togglesplit,
+          bind = ${modifier},F,fullscreen,
+          bind = ${modifier}SHIFT,F,togglefloating,
+          bind = ${modifier}SHIFT,C,exit,
+          bind = ${modifier}SHIFT,left,movewindow,l
+          bind = ${modifier}SHIFT,right,movewindow,r
+          bind = ${modifier}SHIFT,up,movewindow,u
+          bind = ${modifier}SHIFT,down,movewindow,d
+          bind = ${modifier}SHIFT,h,movewindow,l
+          bind = ${modifier}SHIFT,l,movewindow,r
+          bind = ${modifier}SHIFT,k,movewindow,u
+          bind = ${modifier}SHIFT,j,movewindow,d
+          bind = ${modifier},left,movefocus,l
+          bind = ${modifier},right,movefocus,r
+          bind = ${modifier},up,movefocus,u
+          bind = ${modifier},down,movefocus,d
+          bind = ${modifier},h,movefocus,l
+          bind = ${modifier},l,movefocus,r
+          bind = ${modifier},k,movefocus,u
+          bind = ${modifier},j,movefocus,d
+          bind = ${modifier},1,workspace,1
+          bind = ${modifier},2,workspace,2
+          bind = ${modifier},3,workspace,3
+          bind = ${modifier},4,workspace,4
+          bind = ${modifier},5,workspace,5
+          bind = ${modifier},6,workspace,6
+          bind = ${modifier},7,workspace,7
+          bind = ${modifier},8,workspace,8
+          bind = ${modifier},9,workspace,9
+          bind = ${modifier},0,workspace,10
+          bind = ${modifier}SHIFT,SPACE,movetoworkspace,special
+          bind = ${modifier},SPACE,togglespecialworkspace
+          bind = ${modifier}SHIFT,1,movetoworkspace,1
+          bind = ${modifier}SHIFT,2,movetoworkspace,2
+          bind = ${modifier}SHIFT,3,movetoworkspace,3
+          bind = ${modifier}SHIFT,4,movetoworkspace,4
+          bind = ${modifier}SHIFT,5,movetoworkspace,5
+          bind = ${modifier}SHIFT,6,movetoworkspace,6
+          bind = ${modifier}SHIFT,7,movetoworkspace,7
+          bind = ${modifier}SHIFT,8,movetoworkspace,8
+          bind = ${modifier}SHIFT,9,movetoworkspace,9
+          bind = ${modifier}SHIFT,0,movetoworkspace,10
+          bind = ${modifier}CONTROL,right,workspace,e+1
+          bind = ${modifier}CONTROL,left,workspace,e-1
+          bind = ${modifier},mouse_down,workspace, e+1
+          bind = ${modifier},mouse_up,workspace, e-1
+          bindm = ${modifier},mouse:272,movewindow
+          bindm = ${modifier},mouse:273,resizewindow
+          bind = ALT,Tab,cyclenext
+          bind = ALT,Tab,bringactivetotop
+          bind = ,XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+          bind = ,XF86AudioLowerVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+          binde = ,XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+          bind = ,XF86AudioPlay, exec, playerctl play-pause
+          bind = ,XF86AudioPause, exec, playerctl play-pause
+          bind = ,XF86AudioNext, exec, playerctl next
+          bind = ,XF86AudioPrev, exec, playerctl previous
+          bind = ,XF86MonBrightnessDown,exec,brightnessctl set 5%-
+          bind = ,XF86MonBrightnessUp,exec,brightnessctl set +5%
+        ''
+      ];
   };
 }

@@ -35,7 +35,7 @@ in
           rev = "master";
           hash = "sha256-4aW8IEkIFC3IZ/GdC2xLrFyDvbnBEvFyFHB4gsZxmWE=";
         };
-        installPhase = "cp -r \"Doki Doki Literature Club (Chibi Version)/Chibi-DDLC-Version\" $out";
+        installPhase = "cp -r Kurumi/Kurumi $out";
       });
     };
     timeout = 3;
