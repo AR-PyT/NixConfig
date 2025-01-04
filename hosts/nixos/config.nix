@@ -300,16 +300,19 @@ in
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal
+      xdg-desktop-portal-hyprland
     ];
     configPackages = [
       pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal-hyprland
       pkgs.xdg-desktop-portal
     ];
+    config.common.default = "hyprland";
   };
 
   # Services to start
   services = {
+    displayManager.defaultSession = "hyprland";
     xserver = {
       enable = false;
     };
