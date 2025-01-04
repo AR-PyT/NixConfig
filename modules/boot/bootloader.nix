@@ -11,8 +11,8 @@ let
         };
         buildInputs = [ pkgs.plymouth ];
         installPhase = ''
-          mkdir -p $out/share/plymouth/themes/hellonavi
-          cp -r eionix-cat/* $out/share/plymouth/themes/hellonavi
+          mkdir -p $out/share/plymouth/themes/eionix-cat
+          cp -r eionix-cat/* $out/share/plymouth/themes/eionix-cat
         '';
       };
 in
@@ -48,6 +48,6 @@ in
     enable = true;
     font = "${pkgs.jetbrains-mono}/share/fonts/truetype/JetBrainsMono-Regular.ttf";
     themePackages = lib.mkForce [ plymouth_theme ];
-    theme = lib.mkForce "hellonavi";
+    theme = lib.mkForce "eionix-cat";
   };
 }
