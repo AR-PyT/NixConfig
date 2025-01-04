@@ -43,7 +43,7 @@ in
   };
 
   boot.consoleLogLevel = 3;  # Show logs with level >= 3 (default 4)
-  boot.initrd.systemd.enable = true;  # Enable systemd (needed for plymouth with nvidia)
+  # boot.initrd.systemd.enable = true;  # Enable systemd (needed for plymouth with nvidia)
   boot.plymouth = {
     enable = true;
     font = "${pkgs.jetbrains-mono}/share/fonts/truetype/JetBrainsMono-Regular.ttf";
