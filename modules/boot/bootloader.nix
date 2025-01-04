@@ -7,7 +7,7 @@ let
           owner = "HerbFargus";
           repo = "plymouth-themes";
           rev = "master";
-          hash = "sha256-0A79TB2fEDJaO8pU/+aIFYuFtuGUBj5eYYjWK5IwF4A";
+          hash = "sha256-idOh7Feoym7Eh4IPhAt2D7sSvV1DSEKosETEQh8vQmo=";
         };
         buildInputs = [ pkgs.plymouth ];
         installPhase = ''
