@@ -4,15 +4,16 @@ let
         pname = "PlymouthTheme";
         version = "1.1";
         src = pkgs.fetchFromGitHub {
-          owner = "HerbFargus";
-          repo = "plymouth-themes";
+          owner = "yi78";
+          repo = "hellonavi";
           rev = "master";
-          hash = "sha256-idOh7Feoym7Eh4IPhAt2D7sSvVlDSEKosETEQh8vQmo=";
+          hash = "sha256-0A79TB2fEDJ3O8pU/+aIFYuFtuGUBj5eYYjWK5IwF4A=";
         };
         buildInputs = [ pkgs.plymouth ];
         installPhase = ''
-          mkdir -p $out/share/plymouth/themes/eionix-cat
-          cp -r eionix-cat/* $out/share/plymouth/themes/eionix-cat
+          mkdir -p $out/share/plymouth/themes/hellonavi
+          cp -r hellonavi/* $out/share/plymouth/themes/hellonavi
+          cat hellonavi/hellonavi.plymouth | sed  "s@\/usr\/@$out\/@" > $out/share/plymouth/themes/hellonavi/hellonavi.plymouth
         '';
       };
 in
@@ -40,14 +41,16 @@ in
     };
     timeout = 3;
     efi.canTouchEfiVariables = true;
+    systemd-boot.enable = false;
   };
 
   boot.consoleLogLevel = 3;  # Show logs with level >= 3 (default 4)
-  # boot.initrd.systemd.enable = true;  # Enable systemd (needed for plymouth with nvidia)
+  boot.initrd.systemd.enable = true;  # Enable systemd (needed for plymouth with nvidia)
+  boot.initrd.availableKernelModules = [ "i915" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
   boot.plymouth = {
     enable = true;
     font = "${pkgs.jetbrains-mono}/share/fonts/truetype/JetBrainsMono-Regular.ttf";
-    themePackages = lib.mkForce [ plymouth_theme ];
-    theme = lib.mkForce "eionix-cat";
+    themePackages = lib.mkForce [ plymouth_theme pkgs.plymouth-vortex-ubuntu-theme ];
+    theme = lib.mkForce "hellonavi";
   };
 }

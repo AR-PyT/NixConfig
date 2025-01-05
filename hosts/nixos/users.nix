@@ -14,10 +14,9 @@ in
         "libvirtd"
         "scanner"
         "lp"
+        "audio"
       ];
       initialPassword = "password";
-      shell = pkgs.fish;
-      ignoreShellProgramCheck = true;
       packages = with pkgs; [
       ];
     };

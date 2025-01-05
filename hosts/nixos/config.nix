@@ -204,7 +204,6 @@ in
     iwgtk
     impala
     greetd.tuigreet
-    grimblast
     hyprcursor
     hyprcursor
     wl-clipboard
@@ -257,6 +256,8 @@ in
     lolcat
     bat
     tree
+    yad
+    grim
 
     # Applications
     appimage-run 
@@ -394,7 +395,10 @@ in
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
-  hardware.pulseaudio.enable = false;
+
+  # Support sound
+  # hardware.pulseaudio.enable = true;
+  # hardware.pulseaudio.support32Bit = true;
   
   # Security / Polkit
   security.rtkit.enable = true;
