@@ -48,7 +48,7 @@ in
     source = ../../config/wlogout;
     recursive = true;
   };
-  home.file."Pictures/LockScreen" = ../../config/wp1.jpg;
+  home.file."Pictures/LockScreen".source = ../../config/wp1.jpg;
   home.file.".face.icon".source = ../../config/face.jpg;
   home.file.".config/face.jpg".source = ../../config/face.jpg;
   home.file.".config/swappy/config".text = ''

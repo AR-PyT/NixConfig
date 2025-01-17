@@ -18,7 +18,7 @@ in
   # Styling Options
   stylix = {
     enable = true;
-    image = ../../config/wallpapers/beautifulmountainscape.jpg;
+    image = ../../config/wallpapers/wp4.png;
     base16Scheme = {
       base00 = "1d2021"; # ----
       base01 = "383c3e"; # ---
@@ -273,7 +273,7 @@ in
     playerctl
 
     # Audio and Videa
-    youtube-dl
+    yt-dlp
     pavucontrol
     mpv
     v4l-utils

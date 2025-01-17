@@ -20,7 +20,7 @@ pkgs.writeShellScriptBin "list-hypr-bindings" ''
   "ALT + M" "Enter move mode" "Use ESC to move to normal mode" \
   " + 1-0" "Move To Workspace 1 - 10" "workspace,X" \
   " + SHIFT + 1-0" "Move Focused Window To Workspace 1 - 10" "movetoworkspace,X" \
-  "ALT + TAB" Move to previous workspace" "previous" \
+  "ALT + TAB" "Move to previous workspace" "previous" \
   " + SHIFT + F" "Toggle float mode" "togglefloating" \
   " + T" "Terminal" "kitty" \
   " + B" "Launch firefox" "firefox" \

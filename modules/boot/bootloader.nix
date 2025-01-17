@@ -6,8 +6,8 @@ let
         src = pkgs.fetchFromGitHub {
           owner = "AR-PyT";
           repo = "NixConfig";
-          rev = "rewamp";
-          hash = "sha256-0A79TB2fEDJ3O8pU/+aIFYuFtuGUsj5eYYjWK5IwF4A=";
+          rev = "plymouth-custom-theme";
+          hash = "sha256-8BAYxpclo/pa4L+/VpxDupmhWvdwXnbh8NUT2nSnea8=";
         };
         buildInputs = [ pkgs.plymouth ];
         installPhase = ''
