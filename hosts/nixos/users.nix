@@ -16,6 +16,8 @@ in
         "lp"
         "audio"
       ];
+      shell = pkgs.fish;
+      ignoreShellProgramCheck = true;
       initialPassword = "password";
       packages = with pkgs; [
       ];

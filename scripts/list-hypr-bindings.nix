@@ -15,48 +15,30 @@ pkgs.writeShellScriptBin "list-hypr-bindings" ''
   --column=Command: \
   --timeout=90 \
   --timeout-indicator=right \
-  " = Windows/Super/CAPS LOCK" "Modifier Key, used for keybindings" "Doesn't really execute anything by itself." \
-  " + ENTER" "Terminal" "${terminal}" \
-  " + SHIFT + ENTER" "App Launcher" "rofi" \
-  " + ALT + W" "Change Wallpaper" "wallsetter" \
-  " + Q" "Kill Focused Window" "killactive" \
-  " + SHIFT + W" "Search Websites Like Nix Packages" "web-search" \
-  " + SHIFT + N" "Reload SwayNC Styling" "swaync-client -rs" \
-  " + W" "Launch Web Browser" "${browser}" \
-  " + E" "Launch Emoji Selector" "emopicker9000" \
-  " + S" "Take Screenshot" "screenshootin" \
-  " + D" "Launch Discord" "discord" \
-  " + O" "Launch OBS" "obs" \
-  " + G" "Launch GIMP" "gimp" \
-  " + N" "Launch New File Browser Window" "thunar" \
-  " + M" "Launch Spotify" "spotify" \
-  " + P" "Pseudo Tiling" "pseudo" \
-  " + SHIFT + I" "Toggle Split Direction" "togglesplit" \
-  " + F" "Toggle Focused Fullscreen" "fullscreen" \
-  " + SHIFT + F" "Toggle Focused Floating" "fullscreen" \
-  " + SHIFT + C" "Quit / Exit Hyprland" "exit" \
-  " + Left" "Move Focus To Window On The Left" "movefocus,l" \
-  " + Right" "Move Focus To Window On The Right" "movefocus,r" \
-  " + Up" "Move Focus To Window On The Up" "movefocus,u" \
-  " + Down" "Move Focus To Window On The Down" "movefocus,d" \
-  " + SHIFT + Left" "Move Focused Window Left" "movewindow,l" \
-  " + SHIFT + Right" "Move Focused Window Right" "movewindow,r" \
-  " + SHIFT + Up" "Move Focused Window Up" "movewindow,u" \
-  " + SHIFT + Down" "Move Focused Window Down" "movewindow,d" \
-  " + H" "Move Focus To Window On The Left" "movefocus,l" \
-  " + L" "Move Focus To Window On The Right" "movefocus,r" \
-  " + K" "Move Focus To Window On The Up" "movefocus,u" \
-  " + J" "Move Focus To Window On The Down" "movefocus,d" \
-  " + SHIFT + H" "Move Focused Window Left" "movewindow,l" \
-  " + SHIFT + L" "Move Focused Window Right" "movewindow,r" \
-  " + SHIFT + K" "Move Focused Window Up" "movewindow,u" \
-  " + SHIFT + J" "Move Focused Window Down" "movewindow,d" \
-  " + SPACE" "Toggle Special Workspace" "togglespecialworkspace" \
-  " + SHIFT + SPACE" "Send Focused Window To Special Workspace" "movetoworkspace,special" \
+  " = Windows/Super" "Modifier Key, used for keybindings" "Doesn't really execute anything by itself." \
+  "ALT + R" "Enter resize mode" "Use ESC to move to normal mode" \
+  "ALT + M" "Enter move mode" "Use ESC to move to normal mode" \
   " + 1-0" "Move To Workspace 1 - 10" "workspace,X" \
   " + SHIFT + 1-0" "Move Focused Window To Workspace 1 - 10" "movetoworkspace,X" \
-  " + MOUSE_LEFT" "Move/Drag Window" "movewindow" \
-  " + MOUSE_RIGHT" "Resize Window" "resizewindow" \
-  "ALT + TAB" "Cycle Window Focus + Bring To Front" "cyclenext & bringactivetotop" \
+  "ALT + TAB" Move to previous workspace" "previous" \
+  " + SHIFT + F" "Toggle float mode" "togglefloating" \
+  " + T" "Terminal" "kitty" \
+  " + B" "Launch firefox" "firefox" \
+  " + SHIFT + B" "Launch qutebrowser" "qutebrowser" \
+  " + R" "App Launcher" "rofi-launcher" \
+  " + L" "Lock Screen" "hyprlock" \
+  " + Q" "Kill Focused Window" "killactive" \
+  " + F" "File Browser" "thunar" \
+  " + SHIFT + I" "Toggle Split Direction" "togglesplit" \
+  " + SHIFT + N" "Toggle SwayNC" "swaync-client -d" \
+  " + SHIFT + R" "Reload SwayNC Styling" "swaync-client -rs" \
+  " + SHIFT + S" "Take Screenshot" "screenshot_to_clipboard" \
+  " + W" "Search Websites Like Nix Packages" "web-search" \
+  " + SHIFT + B" "Toggle Bluetooth" "bluetooth_toggle" \
+  " + SHIFT + W" "Toggle Wifi" "wifi_toggle" \
+  " + X" "Toggle Wayland Statusbar" "wayland-statusbar-toggle" \
+  "CTRL + ALT + S" "Toggle Pipewire Sink" "speaker-toggle" \
+  " + CTRL + Right" "Move to next workspace" "workspace,e+1" \
+  " + CTRL + Left" "Move to previous workspace" "workspace,e-1" \
   ""
 ''

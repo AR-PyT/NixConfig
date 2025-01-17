@@ -240,6 +240,7 @@ in
     # Terminal Utilities
     kitty
     fish
+    wezterm
     btop
     htop
     ranger
@@ -260,6 +261,7 @@ in
     grim
 
     # Applications
+    swappy
     appimage-run 
     firefox
     remmina
@@ -268,8 +270,10 @@ in
     swaynotificationcenter
     neovide
     slurp
+    playerctl
 
     # Audio and Videa
+    youtube-dl
     pavucontrol
     mpv
     v4l-utils
@@ -425,6 +429,11 @@ in
     '';
   };
 
+  # Power Button Setting
+  services.logind.extraConfig = ''
+    HandlePowerKey=ignore
+  '';
+  
   # Optimization settings and garbage collection automation
   nix = {
     settings = {

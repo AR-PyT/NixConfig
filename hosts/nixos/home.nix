@@ -16,11 +16,9 @@ in
 
   # Import Program Configurations
   imports = [
-    ../../config/emoji.nix
     ../../config/hyprland.nix
     ../../config/neovim.nix
     ../../config/rofi/rofi.nix
-    ../../config/rofi/config-emoji.nix
     ../../config/rofi/config-long.nix
     ../../config/swaync.nix
     ../../config/waybar.nix
@@ -50,6 +48,7 @@ in
     source = ../../config/wlogout;
     recursive = true;
   };
+  home.file."Pictures/LockScreen" = ../../config/wp1.jpg;
   home.file.".face.icon".source = ../../config/face.jpg;
   home.file.".config/face.jpg".source = ../../config/face.jpg;
   home.file.".config/swappy/config".text = ''
@@ -80,13 +79,6 @@ in
     };
   };
 
-  dconf.settings = {
-    "org/virt-manager/virt-manager/connections" = {
-      autoconnect = [ "qemu:///system" ];
-      uris = [ "qemu:///system" ];
-    };
-  };
-
   # Styling Options
   stylix.targets.waybar.enable = false;
   stylix.targets.rofi.enable = false;
@@ -112,21 +104,24 @@ in
 
   # Scripts
   home.packages = [
-    (import ../../scripts/emopicker9000.nix { inherit pkgs; })
-    (import ../../scripts/task-waybar.nix { inherit pkgs; })
-    (import ../../scripts/squirtle.nix { inherit pkgs; })
-    (import ../../scripts/nvidia-offload.nix { inherit pkgs; })
-    (import ../../scripts/wallsetter.nix {
-      inherit pkgs;
-      inherit username;
-    })
-    (import ../../scripts/web-search.nix { inherit pkgs; })
-    (import ../../scripts/rofi-launcher.nix { inherit pkgs; })
-    (import ../../scripts/screenshootin.nix { inherit pkgs; })
+    (import ../../scripts/bluetooth-toggle.nix { inherit pkgs; })
     (import ../../scripts/list-hypr-bindings.nix {
       inherit pkgs;
       inherit host;
     })
+    (import ../../scripts/nvidia-offload.nix { inherit pkgs; })
+    (import ../../scripts/rofi-launcher.nix { inherit pkgs; })
+    (import ../../scripts/screenshootin.nix { inherit pkgs; })
+    (import ../../scripts/screenshot-to-clipboard.nix { inherit pkgs; })
+    (import ../../scripts/speaker-toggle.nix { inherit pkgs; })
+    (import ../../scripts/task-waybar.nix { inherit pkgs; })
+    (import ../../scripts/wallsetter.nix {
+      inherit pkgs;
+      inherit username;
+    })
+    (import ../../scripts/wayland-statusbar-toggle.nix { inherit pkgs; })
+    (import ../../scripts/web-search.nix { inherit pkgs; })
+    (import ../../scripts/wifi-toggle.nix { inherit pkgs; })
   ];
 
   services = {
@@ -174,21 +169,19 @@ in
         tab_fade 1
         active_tab_font_style   bold
         inactive_tab_font_style bold
+
+        background_image ../config/lain.png
+        background_image_layout cscaled
+        background_tint 0.9
       '';
     };
-     starship = {
-            enable = true;
-            package = pkgs.starship;
-     };
-    bash = {
+    starship = {
       enable = true;
-      enableCompletion = true;
-      profileExtra = ''
-        #if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
-        #  exec Hyprland
-        #fi
-      '';
-      initExtra = ''
+      package = pkgs.starship;
+    };
+    fish = {
+      enable = true;
+      interactiveShellInit = ''
         fastfetch
         if [ -f $HOME/.bashrc-personal ]; then
           source $HOME/.bashrc-personal
@@ -196,10 +189,7 @@ in
       '';
       shellAliases = {
         sv = "sudo nvim";
-        fr = "nh os switch --hostname ${host} /home/${username}/zaneyos";
-        fu = "nh os switch --hostname ${host} --update /home/${username}/zaneyos";
-        zu = "sh <(curl -L https://gitlab.com/Zaney/zaneyos/-/raw/main/install-zaneyos.sh)";
-        ncg = "nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";
+        ns = "nix-shell";
         v = "nvim";
         cat = "bat";
         ls = "eza --icons";
@@ -207,6 +197,10 @@ in
         la = "eza -lah --icons --grid --group-directories-first";
         ".." = "cd ..";
       };
+    };
+    bash = {
+      enable = true;
+      enableCompletion = true;
     };
     home-manager.enable = true;
     hyprlock = {
@@ -220,7 +214,7 @@ in
         };
         background = [
           {
-            path = "/home/${username}/Pictures/Wallpapers/zaney-wallpaper.jpg";
+            path = "/home/${username}/Pictures/LockScreen/wp1.jpg";
             blur_passes = 3;
             blur_size = 8;
           }
