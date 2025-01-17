@@ -4,10 +4,10 @@ let
         pname = "PlymouthTheme";
         version = "1.1";
         src = pkgs.fetchFromGitHub {
-          owner = "yi78";
-          repo = "hellonavi";
-          rev = "master";
-          hash = "sha256-0A79TB2fEDJ3O8pU/+aIFYuFtuGUBj5eYYjWK5IwF4A=";
+          owner = "AR-PyT";
+          repo = "NixConfig";
+          rev = "rewamp";
+          hash = "sha256-0A79TB2fEDJ3O8pU/+aIFYuFtuGUsj5eYYjWK5IwF4A=";
         };
         buildInputs = [ pkgs.plymouth ];
         installPhase = ''
