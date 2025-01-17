@@ -48,9 +48,10 @@ in
     source = ../../config/wlogout;
     recursive = true;
   };
-  home.file."Pictures/LockScreen".source = ../../config/wp1.jpg;
+  home.file.".config/lockscreen.jpg".source = ../../config/wp1.jpg;
   home.file.".face.icon".source = ../../config/face.jpg;
   home.file.".config/face.jpg".source = ../../config/face.jpg;
+  home.file.".config/lain.png".source = ../../config/lain.png;
   home.file.".config/swappy/config".text = ''
     [Default]
     save_dir=/home/${username}/Pictures/Screenshots
@@ -170,9 +171,9 @@ in
         active_tab_font_style   bold
         inactive_tab_font_style bold
 
-        background_image ../config/lain.png
-        background_image_layout cscaled
-        background_tint 0.9
+        # background_image /home/${username}/.config/lain.png
+        # background_image_layout cscaled
+        # background_tint 0.9
       '';
     };
     starship = {
@@ -183,9 +184,6 @@ in
       enable = true;
       interactiveShellInit = ''
         fastfetch
-        if [ -f $HOME/.bashrc-personal ]; then
-          source $HOME/.bashrc-personal
-        fi
       '';
       shellAliases = {
         sv = "sudo nvim";
@@ -208,15 +206,15 @@ in
       settings = {
         general = {
           disable_loading_bar = true;
-          grace = 10;
+          grace = 5;
           hide_cursor = true;
           no_fade_in = false;
         };
         background = [
           {
-            path = "/home/${username}/Pictures/LockScreen/wp1.jpg";
-            blur_passes = 3;
-            blur_size = 8;
+            path = "/home/${username}/.config/lockscreen.jpg";
+            blur_passes = 1;
+            blur_size = 1;
           }
         ];
         image = [

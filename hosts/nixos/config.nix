@@ -264,6 +264,7 @@ in
     swappy
     appimage-run 
     firefox
+    qutebrowser
     remmina
     file-roller
     wpsoffice
