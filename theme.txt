@@ -1,5 +1,5 @@
-# Yuri Doki Doki Literatura Club - J3xLe1988B3lx0x2E6
-#GRU2 Linux Theme
+#Doki Doki Literatura Club - J3xLe1988B3lx0x2E6
+#GRUB2 Linux Theme
 
 #Global Property
 title-text: ""
@@ -10,7 +10,7 @@ terminal-top: "0"
 terminal-width: "100%"
 terminal-height: "100%"
 terminal-border: "0"
-desktop-image: "background.png"
+desktop-image: "''${grub_background:-default.png}"
 desktop-color: "#0036c7"
 message-font: "Terminus Regular Bold 14"
 message-color: "#ffffff"
