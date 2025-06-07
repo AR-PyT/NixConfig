@@ -10,11 +10,9 @@ in
     ../modules/nvidia-prime-drivers.nix
     ../modules/intel-drivers.nix
     ../modules/local-hardware-clock.nix
-
-    ./keyboard.nix
-
-  ] ++ 
-  (import ../modules/boot.nix);
+    ../modules/keyboard.nix
+    ../modules/boot
+  ];
 
   # Styling Options
   stylix = {
