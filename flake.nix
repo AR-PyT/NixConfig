@@ -17,8 +17,7 @@
     { nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
     let
       system = "x86_64-linux";
-      host = "nixos";
-      username = "abdul";
+      inherit (import ./variables.nix) host username;
     in
     {
       nixosConfigurations = {
@@ -27,36 +26,18 @@
             inherit (nixpkgs) lib;
 	          inherit system;
             inherit inputs;
-            inherit username;
-            inherit host;
           };
           modules = [
-            # {
-              # nixpkgs.overlays = [
-              #   (final: prev: {
-              #     plymouth = prev.plymouth.overrideAttrs ({ src, ... }: {
-              #       version = "24.004.60-unstable-2024-08-28";
-
-              #       src = src.override {
-              #         rev = "ea83580a6d66afd2b37877fc75248834fe530d99";
-              #         hash = "sha256-GQzf756Y26aCXPyZL9r+UW7uo+wu8IXNgMeJkgFGWnA=";
-              #       };
-              #     });
-              #   })
-              # ];
-            # }
-            ./hosts/${host}/config.nix
+            ./${host}/config.nix
             inputs.stylix.nixosModules.stylix
             home-manager.nixosModules.home-manager {
               home-manager.extraSpecialArgs = {
-                inherit username;
                 inherit inputs;
-                inherit host;
               };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "backup";
-              home-manager.users.${username} = import ./hosts/${host}/home.nix;
+              home-manager.users.${username} = import ./${host}/home.nix;
             }
           ];
         };

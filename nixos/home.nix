@@ -1,12 +1,10 @@
 {
   pkgs,
-  username,
-  host,
   config,
   ...
 }:
 let
-  inherit (import ./variables.nix) gitUsername gitEmail configPath;
+  inherit (import ../variables.nix) gitUsername gitEmail configPath host username;
 in
 {
   # Home Manager Settings
@@ -16,14 +14,14 @@ in
 
   # Import Program Configurations
   imports = [
-    ../../config/hyprland.nix
-    ../../config/neovim.nix
-    ../../config/rofi/rofi.nix
-    ../../config/rofi/config-long.nix
-    ../../config/swaync.nix
-    ../../config/waybar.nix
-    ../../config/wlogout.nix
-    ../../config/fastfetch
+    ../config/hyprland.nix
+    ../config/neovim.nix
+    ../config/rofi/rofi.nix
+    ../config/rofi/config-long.nix
+    ../config/swaync.nix
+    ../config/waybar.nix
+    ../config/wlogout.nix
+    ../config/fastfetch
   ];
 
   # home.file = {
@@ -41,17 +39,17 @@ in
 
   # Place Files Inside Home Directory
   home.file."Pictures/Wallpapers" = {
-    source = ../../config/wallpapers;
+    source = ../config/wallpapers;
     recursive = true;
   };
   home.file.".config/wlogout/icons" = {
-    source = ../../config/wlogout;
+    source = ../config/wlogout;
     recursive = true;
   };
-  home.file.".config/lockscreen.jpg".source = ../../config/wp1.jpg;
-  home.file.".face.icon".source = ../../config/face.jpg;
-  home.file.".config/face.jpg".source = ../../config/face.jpg;
-  home.file.".config/lain.png".source = ../../config/lain.png;
+  home.file.".config/lockscreen.jpg".source = ../config/wp1.jpg;
+  home.file.".face.icon".source = ../config/face.jpg;
+  home.file.".config/face.jpg".source = ../config/face.jpg;
+  home.file.".config/lain.png".source = ../config/lain.png;
   home.file.".config/swappy/config".text = ''
     [Default]
     save_dir=/home/${username}/Pictures/Screenshots
@@ -105,24 +103,24 @@ in
 
   # Scripts
   home.packages = [
-    (import ../../scripts/bluetooth-toggle.nix { inherit pkgs; })
-    (import ../../scripts/list-hypr-bindings.nix {
+    (import ../scripts/bluetooth-toggle.nix { inherit pkgs; })
+    (import ../scripts/list-hypr-bindings.nix {
       inherit pkgs;
       inherit host;
     })
-    (import ../../scripts/nvidia-offload.nix { inherit pkgs; })
-    (import ../../scripts/rofi-launcher.nix { inherit pkgs; })
-    (import ../../scripts/screenshootin.nix { inherit pkgs; })
-    (import ../../scripts/screenshot-to-clipboard.nix { inherit pkgs; })
-    (import ../../scripts/speaker-toggle.nix { inherit pkgs; })
-    (import ../../scripts/task-waybar.nix { inherit pkgs; })
-    (import ../../scripts/wallsetter.nix {
+    (import ../scripts/nvidia-offload.nix { inherit pkgs; })
+    (import ../scripts/rofi-launcher.nix { inherit pkgs; })
+    (import ../scripts/screenshootin.nix { inherit pkgs; })
+    (import ../scripts/screenshot-to-clipboard.nix { inherit pkgs; })
+    (import ../scripts/speaker-toggle.nix { inherit pkgs; })
+    (import ../scripts/task-waybar.nix { inherit pkgs; })
+    (import ../scripts/wallsetter.nix {
       inherit pkgs;
       inherit username;
     })
-    (import ../../scripts/wayland-statusbar-toggle.nix { inherit pkgs; })
-    (import ../../scripts/web-search.nix { inherit pkgs; })
-    (import ../../scripts/wifi-toggle.nix { inherit pkgs; })
+    (import ../scripts/wayland-statusbar-toggle.nix { inherit pkgs; })
+    (import ../scripts/web-search.nix { inherit pkgs; })
+    (import ../scripts/wifi-toggle.nix { inherit pkgs; })
   ];
 
   services = {

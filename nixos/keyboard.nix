@@ -13,6 +13,7 @@
         extraDefCfg = "process-unmapped-keys yes";
         config = ''
           (defsrc
+            caps esc
             pp prev next f10
             lctrl lmet lalt ralt rmet rctrl
           )
@@ -23,11 +24,13 @@
           )
 
           (deflayer base
+            esc caps
             pp prev next @sap
             lctrl lmet lalt ralt rmet rctrl
           )
 
           (deflayer media-layer
+            esc caps
             lctrl lmet lalt @sbl
             XX XX XX XX XX XX
           )

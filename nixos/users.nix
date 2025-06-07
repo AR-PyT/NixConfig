@@ -1,6 +1,6 @@
-{ pkgs, username, ... }:
+{ pkgs, ... }:
 let
-  inherit (import ./variables.nix) gitUsername;
+  inherit (import ../variables.nix) gitUsername username;
 in
 {
   users.users = {

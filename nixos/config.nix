@@ -1,24 +1,25 @@
-{ config, pkgs, host, username, options, lib, ... }:
+{ config, pkgs, options, lib, ... }:
 let
+  inherit (import ./variables.nix) host username;
 in
 {
   imports = [
     ./hardware.nix
     ./users.nix
-    ../../modules/nvidia-drivers.nix
-    ../../modules/nvidia-prime-drivers.nix
-    ../../modules/intel-drivers.nix
-    ../../modules/local-hardware-clock.nix
+    ../modules/nvidia-drivers.nix
+    ../modules/nvidia-prime-drivers.nix
+    ../modules/intel-drivers.nix
+    ../modules/local-hardware-clock.nix
 
     ./keyboard.nix
 
   ] ++ 
-  (import ../../modules/boot.nix);
+  (import ../modules/boot.nix);
 
   # Styling Options
   stylix = {
     enable = true;
-    image = ../../config/wallpapers/wp4.png;
+    image = ../config/wallpapers/wp4.png;
     base16Scheme = {
       base00 = "1d2021"; # ----
       base01 = "383c3e"; # ---
