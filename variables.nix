@@ -2,7 +2,7 @@
   gitUsername = "Abdul Rehman";
   gitEmail = "abrehman.bscs21seecs@seecs.edu.pk";
   configPath = "/home/abdul/NixConfig/config";
-  host = "nixos_v3.1";
+  host = "nixos";
   username = "abdul";
   
   # Hyprland Settings

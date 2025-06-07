@@ -1,12 +1,11 @@
 {
   lib,
-  username,
-  host,
   config,
   ...
 }:
 
 let
+  inherit (import ../variables.nix) host username;
 in
 with lib;
 {

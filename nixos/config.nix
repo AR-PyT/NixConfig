@@ -1,6 +1,6 @@
 { config, pkgs, options, lib, ... }:
 let
-  inherit (import ./variables.nix) host username;
+  inherit (import ../variables.nix) host username;
 in
 {
   imports = [
