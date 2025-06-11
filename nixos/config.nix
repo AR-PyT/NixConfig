@@ -1,4 +1,4 @@
-{ config, pkgs, options, lib, ... }:
+{ config, pkgs, options, lib, inputs, system, pkgs-unstable, ... }:
 let
   inherit (import ../variables.nix) host username;
 in
@@ -72,10 +72,11 @@ in
   local.hardware-clock.enable = true;
 
   # Enable networking
-  networking.wireless.iwd = {
-    enable = true;
-    settings.General.EnableNetworkConfiguration = true;
-  };
+  # networking.wireless.iwd = {
+  #   enable = true;
+  #   settings.General.EnableNetworkConfiguration = true;
+  # };
+  networking.networkmanager.enable = true;
   networking.hostName = host;
   networking.timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
 
@@ -198,6 +199,8 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    # (import ../modules/zen-browser {inherit pkgs-unstable; })
+    (import ../modules/zen-browser.nix {inherit pkgs-unstable; })
     # System Utitlities
     overskride
     iwgtk
@@ -404,8 +407,6 @@ in
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
 
-  services.mullvad-vpn.enable = true;
-
   # Support sound
   # hardware.pulseaudio.enable = true;
   # hardware.pulseaudio.support32Bit = true;
@@ -439,9 +440,6 @@ in
   services.logind.extraConfig = ''
     HandlePowerKey=ignore
   '';
-  
-  # Enable Mullvad VPN
-  # services.mullvad-vpn.enable = true;
 
   # Optimization settings and garbage collection automation
   nix = {
@@ -473,21 +471,20 @@ in
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  networking.firewall = {
-    # enable the firewall
-    enable = true;
+  # networking.firewall = {
+  #   # enable the firewall
+  #   enable = true;
 
-    # always allow traffic from your Tailscale network
-    trustedInterfaces = [ "mullvad" ];
+  #   # always allow traffic from your Tailscale network
+  #   trustedInterfaces = [ "mullvad" ];
 
-    # allow the Tailscale UDP port through the firewall
-    allowedUDPPorts = [ config.services.tailscale.port ];
+  #   # allow the Tailscale UDP port through the firewall
+  #   allowedUDPPorts = [ config.services.tailscale.port ];
 
-    # allow you to SSH in over the public internet
-    allowedTCPPorts = [ 22 ];
-  };
-services.mullvad-vpn.package = pkgs.mullvad-vpn;
-networking.networkmanager.enable = true;
+  #   # allow you to SSH in over the public internet
+  #   allowedTCPPorts = [ 22 ];
+  # };
+  # services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
 
   # This value determines the NixOS release from which the default
