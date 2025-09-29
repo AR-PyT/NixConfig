@@ -217,9 +217,8 @@ let
       pname = "glean-sdk";
       version = "61.2.0";
 
-      pyproject=true;
-      build-system = [ setuptools ];
-      
+      format = "setuptools";
+
       src = pkgs.fetchFromGitHub {
         owner = "mozilla";
         repo = "glean";
