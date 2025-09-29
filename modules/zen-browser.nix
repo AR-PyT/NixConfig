@@ -238,7 +238,7 @@ let
         cargo
         rustc
         maturin
-        python3Packages.setuptools
+        python311Packages.setuptools
       ];
 
       buildInputs = with pkgs; [
