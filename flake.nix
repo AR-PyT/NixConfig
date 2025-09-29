@@ -1,11 +1,11 @@
 {
   description = "General NIXOS for hyprland configuration v2.1";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/release-24.11";
+    home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    stylix.url = "github:nix-community/stylix/release-24.11";
+    stylix.url = "github:nix-community/stylix/release-25.05";
 
     # base16-nix.url = "github:SenchoPens/base16.nix";
     # base16-nix.flake = false;
