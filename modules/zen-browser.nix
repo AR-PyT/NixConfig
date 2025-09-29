@@ -256,6 +256,8 @@ let
         openssl
         python311Packages.glean-parser
         python311Packages.semver
+        tcl
+        tk
       ];
 
       preBuild = ''
