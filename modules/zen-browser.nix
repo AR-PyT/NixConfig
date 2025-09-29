@@ -264,6 +264,7 @@ let
       preBuild = ''
         export OPENSSL_DIR="${pkgs.openssl.dev}"
         export OPENSSL_LIB_DIR="${pkgs.openssl.out}/lib"
+        export NIX_CFLAGS_COMPILE="-I${pkgs.libtommath}/include $NIX_CFLAGS_COMPILE"
       '';
     };
     mozillaPython = pkgs.python311.buildEnv.override {
