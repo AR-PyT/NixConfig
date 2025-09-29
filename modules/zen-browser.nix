@@ -136,16 +136,21 @@ let
         '';
     });
     zstandard_0_22_0 = pkgs.python311Packages.zstandard.overrideAttrs (old: {
+    version = "0.22.0";
+    src = pkgs.fetchPypi {
+      pname = "zstandard";
       version = "0.22.0";
-      src = pkgs.fetchPypi {
-        pname = "zstandard";
-        version = "0.22.0";
-        hash = "sha256-giajPFQry1TNa9CjZgZ7YQtBcTtkyavsG8RTPWn1HnA=";
-      };
-      postPatch = ''
-        sed -i '/requires = \[/ s/setuptools/&<69.0.0, /' pyproject.toml
-      '';
-    });
+      hash = "sha256-giajPFQry1TNa9CjZgZ7YQtBcTtkyavsG8RTPWn1HnA=";
+    };
+    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [
+      pkgs.python311Packages.cffi
+      pkgs.python311Packages.setuptools
+      pkgs.python311Packages.wheel
+    ];
+    postPatch = ''
+      sed -i '/requires = \[/ s/setuptools/&<69.0.0, /' pyproject.toml
+    '';
+  });
 
     # glean_sdk_61_2_0 = pkgs.python3Packages.buildPythonPackage rec {
     #   version = "61.2.0";
