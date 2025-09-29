@@ -260,6 +260,7 @@ let
         macholib
         wheel
         semver
+        (setuptools.overridePythonAttrs (old: { version = "68.2.2"; })) # Pin setuptools
       ];
     };
 
