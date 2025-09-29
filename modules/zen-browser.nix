@@ -224,7 +224,7 @@ let
         hash = "sha256-MB+1NzQvOooYlUaMHGBBjpCTGGM7Tq/sNMyLkoe0U0Q=";
       };
 
-      cargoDeps = pkgs.rustPlatform.fetchCargoTarball {
+      cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
         inherit src;
         name = "${pname}-${version}";
         hash = "sha256-7HOJEpFIRUqkR3lTwCt3NmEV0VgYWFpMDxeLun7x4JI=";
