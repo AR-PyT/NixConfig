@@ -5,9 +5,7 @@ let
   pkgs = pkgs-unstable;
 
   # Define the version of Zen Browser and Firefox
-  # version = "1.12.10b";
-  version = "1.0.1-a.19";
-  # firefoxVersion = "139.0.1";
+  version = "1.12.10b";
   firefoxVersion = "132.0.1";
 
   # Feature flags
@@ -34,12 +32,13 @@ let
   # Surfer required for building Zen Browser (combining with firefox)
   surfer = pkgs.buildNpmPackage {
     pname = "surfer";
-    version = "1.5.0";
+    version = "1.6.0";
 
     src = pkgs.fetchFromGitHub {
       owner = "zen-browser";
       repo = "surfer";
-      rev = "50af7094ede6e9f0910f010c531f8447876a6464";
+      # rev = "50af7094ede6e9f0910f010c531f8447876a6464";
+      rev = "fafc5b8db7c59e3f63c0bcc22bb4b3f152e7535a";
       hash = "sha256-wmAWg6hoICNHfoXJifYFHmyFQS6H22u3GSuRW4alexw=";
     };
 
@@ -108,6 +107,8 @@ let
       hash = "sha256-+eehLsnQoWapkSKo3zWFxaz6N68BryK1XsmSk48zbbk=";
       fetchSubmodules = true;
     };
+
+    patches = [];
 
     inherit firefoxVersion;
     firefoxSrc = pkgs.fetchurl {
@@ -215,7 +216,6 @@ let
     glean_sdk_61_2_0 = pkgs.python311Packages.buildPythonPackage rec {
       pname = "glean-sdk";
       version = "61.2.0";
-      format = "pyproject";
 
       src = pkgs.fetchFromGitHub {
         owner = "mozilla";
@@ -224,7 +224,7 @@ let
         hash = "sha256-MB+1NzQvOooYlUaMHGBBjpCTGGM7Tq/sNMyLkoe0U0Q=";
       };
 
-      cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+      cargoDeps = pkgs.rustPlatform.fetchCargoTarball {
         inherit src;
         name = "${pname}-${version}";
         hash = "sha256-7HOJEpFIRUqkR3lTwCt3NmEV0VgYWFpMDxeLun7x4JI=";
@@ -248,15 +248,7 @@ let
       preBuild = ''
         export OPENSSL_DIR="${pkgs.openssl.dev}"
         export OPENSSL_LIB_DIR="${pkgs.openssl.out}/lib"
-        # Patch in a pyproject.toml if missing
-        if [ ! -f pyproject.toml ]; then
-          cat > pyproject.toml <<EOF
-[build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
-EOF
-    fi
-  '';
+      '';
     };
     mozillaPython = pkgs.python311.buildEnv.override {
       extraLibs = with pkgs.python311Packages; [
@@ -394,8 +386,9 @@ EOF
       export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE="system"
       export PYTHONPATH="${mozillaPython}/${mozillaPython.sitePackages}"
       surfer ci --brand alpha --display-version ${version}
-
       install -D ${firefoxSrc} .surfer/engine/firefox-${firefoxVersion}.source.tar.xz
+      echo "Using Firefox source: ${firefoxSrc}"
+      echo "Skipping surfer download due to version mismatch bug"
       surfer download
       surfer import
       patchShebangs engine/mach engine/build engine/tools
@@ -449,7 +442,6 @@ EOF
       # These values are used by `wrapFirefox`.
       # ref; `pkgs/applications/networking/browsers/firefox/wrapper.nix'
       binaryName = meta.mainProgram;
-      applicationName = "zen";
       inherit alsaSupport;
       inherit jackSupport;
       inherit pipewireSupport;
