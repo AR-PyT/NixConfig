@@ -94,7 +94,7 @@ let
   disableAVX = if pkgs.stdenv.hostPlatform.system == "aarch64-linux" then "--disable-wasm-avx" else "";
 in
 let
-  python = pkgs.python311;
+  python = pkgs.python311Full;
   zen-browser-unwrapped = buildpkgs.stdenv.mkDerivation rec {
     pname = "zen-browser-unwrapped";
     inherit version;
@@ -135,7 +135,7 @@ let
             --replace 'kIOMainPortDefault' 'kIOMasterPortDefault'
         '';
     });
-    zstandard_0_22_0 = pkgs.python311Packages.buildPythonPackage rec {
+    zstandard_0_22_0 = pkgs.python311FullPackages.buildPythonPackage rec {
     pname = "zstandard";
     version = "0.22.0";
     format = "setuptools";
@@ -224,7 +224,7 @@ let
     #   # unpackCmd = "tar xzf $curSrc";
     # });
 
-    glean_sdk_61_2_0 = pkgs.python311Packages.buildPythonPackage rec {
+    glean_sdk_61_2_0 = pkgs.python311FullPackages.buildPythonPackage rec {
       pname = "glean-sdk";
       version = "61.2.0";
 
