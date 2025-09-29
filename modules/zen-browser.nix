@@ -215,6 +215,7 @@ let
     glean_sdk_61_2_0 = pkgs.python311Packages.buildPythonPackage rec {
       pname = "glean-sdk";
       version = "61.2.0";
+      format = "pyproject";
 
       src = pkgs.fetchFromGitHub {
         owner = "mozilla";
@@ -247,7 +248,15 @@ let
       preBuild = ''
         export OPENSSL_DIR="${pkgs.openssl.dev}"
         export OPENSSL_LIB_DIR="${pkgs.openssl.out}/lib"
-      '';
+        # Patch in a pyproject.toml if missing
+        if [ ! -f pyproject.toml ]; then
+          cat > pyproject.toml <<EOF
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+EOF
+    fi
+  '';
     };
     mozillaPython = pkgs.python311.buildEnv.override {
       extraLibs = with pkgs.python311Packages; [
