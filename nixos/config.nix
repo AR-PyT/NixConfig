@@ -193,7 +193,7 @@ in
       enableSSHSupport = true;
     };
     thunar = {
-      enable = false;
+      enable = true;
       plugins = with pkgs.xfce; [
         thunar-archive-plugin
         thunar-volman
@@ -234,7 +234,7 @@ in
     # System Utitlities
     gsimplecal
     overskride
-    thunar
+    xfce.thunar
     greetd.tuigreet
     hyprcursor
     hyprcursor
