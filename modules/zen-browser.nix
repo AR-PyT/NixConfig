@@ -5,8 +5,8 @@ let
   pkgs = pkgs-unstable;
 
   # Define the version of Zen Browser and Firefox
-  version = "1.12.10b";
-  firefoxVersion = "132.0.1";
+  version = "1.16.1b";
+  firefoxVersion = "143.0";
 
   # Feature flags
   generic = false;

@@ -49,7 +49,7 @@ with lib;
           format = if clock24h == true then '' {:L%H:%M}'' else '' {:L%I:%M %p}'';
           tooltip = true;
           tooltip-format = "{:%A, %d %B %Y }\n<tt><small>{calendar}</small></tt>";
-          on-click = "gsimplecal --show"
+          on-click = "gsimplecal --show";
         };
         "hyprland/window" = {
           max-length = 22;
