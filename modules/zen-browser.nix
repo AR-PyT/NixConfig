@@ -138,6 +138,7 @@ let
     zstandard_0_22_0 = pkgs.python311Packages.buildPythonPackage rec {
     pname = "zstandard";
     version = "0.22.0";
+    format = "setuptools";
     src = pkgs.fetchPypi {
       pname = "zstandard";
       version = "0.22.0";
