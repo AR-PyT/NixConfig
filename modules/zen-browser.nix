@@ -5,7 +5,9 @@ let
   pkgs = pkgs-unstable;
 
   # Define the version of Zen Browser and Firefox
-  version = "1.12.10b";
+  # version = "1.12.10b";
+  version = "1.0.1-a.19";
+  # firefoxVersion = "139.0.1";
   firefoxVersion = "132.0.1";
 
   # Feature flags
@@ -32,13 +34,12 @@ let
   # Surfer required for building Zen Browser (combining with firefox)
   surfer = pkgs.buildNpmPackage {
     pname = "surfer";
-    version = "1.6.0";
+    version = "1.5.0";
 
     src = pkgs.fetchFromGitHub {
       owner = "zen-browser";
       repo = "surfer";
-      # rev = "50af7094ede6e9f0910f010c531f8447876a6464";
-      rev = "fafc5b8db7c59e3f63c0bcc22bb4b3f152e7535a";
+      rev = "50af7094ede6e9f0910f010c531f8447876a6464";
       hash = "sha256-wmAWg6hoICNHfoXJifYFHmyFQS6H22u3GSuRW4alexw=";
     };
 
@@ -94,7 +95,7 @@ let
   disableAVX = if pkgs.stdenv.hostPlatform.system == "aarch64-linux" then "--disable-wasm-avx" else "";
 in
 let
-  python = pkgs.python311Full;
+  python = pkgs.python311;
   zen-browser-unwrapped = buildpkgs.stdenv.mkDerivation rec {
     pname = "zen-browser-unwrapped";
     inherit version;
@@ -104,11 +105,9 @@ let
       owner = "zen-browser";
       repo = "desktop";
       rev = version;
-      hash = "sha256-7GsZk3zzNMrcP2Iwxkhzxq/ztIFHcFi/hTCXidM4cso=";
+      hash = "sha256-+eehLsnQoWapkSKo3zWFxaz6N68BryK1XsmSk48zbbk=";
       fetchSubmodules = true;
     };
-
-    patches = [];
 
     inherit firefoxVersion;
     firefoxSrc = pkgs.fetchurl {
@@ -135,25 +134,14 @@ let
             --replace 'kIOMainPortDefault' 'kIOMasterPortDefault'
         '';
     });
-    zstandard_0_22_0 = pkgs.python311Packages.buildPythonPackage rec {
-    pname = "zstandard";
-    version = "0.22.0";
-    format = "setuptools";
-    src = pkgs.fetchPypi {
-      pname = "zstandard";
+    zstandard_0_22_0 = pkgs.python311Packages.zstandard.overrideAttrs (old: {
       version = "0.22.0";
-      hash = "sha256-giajPFQry1TNa9CjZgZ7YQtBcTtkyavsG8RTPWn1HnA=";
-    };
-    nativeBuildInputs = [
-      pkgs.python311Packages.cffi
-      pkgs.python311Packages.setuptools
-      pkgs.python311Packages.wheel
-    ];
-    postPatch = ''
-      sed -i '/requires = \[/ s/setuptools/&<69.0.0, /' pyproject.toml
-    '';
-    doCheck = false; # Optionally disable tests if they require network or fail
-  };
+      src = pkgs.fetchPypi {
+        pname = "zstandard";
+        version = "0.22.0";
+        hash = "sha256-giajPFQry1TNa9CjZgZ7YQtBcTtkyavsG8RTPWn1HnA=";
+      };
+    });
 
     # glean_sdk_61_2_0 = pkgs.python3Packages.buildPythonPackage rec {
     #   version = "61.2.0";
@@ -228,8 +216,6 @@ let
       pname = "glean-sdk";
       version = "61.2.0";
 
-      format = "setuptools";
-
       src = pkgs.fetchFromGitHub {
         owner = "mozilla";
         repo = "glean";
@@ -237,7 +223,7 @@ let
         hash = "sha256-MB+1NzQvOooYlUaMHGBBjpCTGGM7Tq/sNMyLkoe0U0Q=";
       };
 
-      cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+      cargoDeps = pkgs.rustPlatform.fetchCargoTarball {
         inherit src;
         name = "${pname}-${version}";
         hash = "sha256-7HOJEpFIRUqkR3lTwCt3NmEV0VgYWFpMDxeLun7x4JI=";
@@ -249,22 +235,18 @@ let
         cargo
         rustc
         maturin
-        python311Packages.setuptools
+        python3Packages.setuptools
       ];
 
       buildInputs = with pkgs; [
         openssl
         python311Packages.glean-parser
         python311Packages.semver
-        tcl
-        tk
-        libtommath
       ];
 
       preBuild = ''
         export OPENSSL_DIR="${pkgs.openssl.dev}"
         export OPENSSL_LIB_DIR="${pkgs.openssl.out}/lib"
-        export NIX_CFLAGS_COMPILE="-I${pkgs.tcl}/include -I${pkgs.tk}/include $NIX_CFLAGS_COMPILE"
       '';
     };
     mozillaPython = pkgs.python311.buildEnv.override {
@@ -275,7 +257,6 @@ let
         macholib
         wheel
         semver
-        (setuptools.overridePythonAttrs (old: { version = "68.2.2"; })) # Pin setuptools
       ];
     };
 
@@ -404,9 +385,8 @@ let
       export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE="system"
       export PYTHONPATH="${mozillaPython}/${mozillaPython.sitePackages}"
       surfer ci --brand alpha --display-version ${version}
+
       install -D ${firefoxSrc} .surfer/engine/firefox-${firefoxVersion}.source.tar.xz
-      echo "Using Firefox source: ${firefoxSrc}"
-      echo "Skipping surfer download due to version mismatch bug"
       surfer download
       surfer import
       patchShebangs engine/mach engine/build engine/tools
@@ -460,7 +440,6 @@ let
       # These values are used by `wrapFirefox`.
       # ref; `pkgs/applications/networking/browsers/firefox/wrapper.nix'
       binaryName = meta.mainProgram;
-      applicationName = "zen";
       inherit alsaSupport;
       inherit jackSupport;
       inherit pipewireSupport;
@@ -477,4 +456,3 @@ pkgs.wrapFirefox zen-browser-unwrapped {
   pname = "zen-browser";
   libName = "zen";
 }
-
