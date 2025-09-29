@@ -142,6 +142,10 @@ let
         version = "0.22.0";
         hash = "sha256-giajPFQry1TNa9CjZgZ7YQtBcTtkyavsG8RTPWn1HnA=";
       };
+      postPatch = ''
+        substituteInPlace pyproject.toml \
+          --replace 'setuptools' 'setuptools<69.0.0'
+      '';
     });
 
     # glean_sdk_61_2_0 = pkgs.python3Packages.buildPythonPackage rec {
