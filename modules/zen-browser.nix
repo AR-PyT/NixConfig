@@ -258,6 +258,7 @@ let
         python311Packages.semver
         tcl
         tk
+        libtommath
       ];
 
       preBuild = ''
