@@ -104,7 +104,7 @@ let
       owner = "zen-browser";
       repo = "desktop";
       rev = version;
-      hash = "sha256-7GsZk3zzNMrcP2Iwxkhzxq/zt1FHcFi/hTCXidM4cso=";
+      hash = "sha256-7GsZk3zzNMrcP2Iwxkhzxq/ztIFHcFi/hTCXidM4cso=";
       fetchSubmodules = true;
     };
 
