@@ -143,8 +143,7 @@ let
         hash = "sha256-giajPFQry1TNa9CjZgZ7YQtBcTtkyavsG8RTPWn1HnA=";
       };
       postPatch = ''
-        substituteInPlace pyproject.toml \
-          --replace 'setuptools' 'setuptools<69.0.0'
+        sed -i '/requires = \[/ s/setuptools/&<69.0.0, /' pyproject.toml
       '';
     });
 
