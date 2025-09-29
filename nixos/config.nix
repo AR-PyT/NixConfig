@@ -52,7 +52,8 @@ in
     cursor.size = 24;
     fonts = {
       monospace = {
-            package = pkgs.nerd-fonts.jetbrains-mono;  # Updated to new format
+            package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+            # package = pkgs.nerd-fonts.jetbrains-mono;  # Updated to new format
             name = "JetBrainsMono Nerd Font Mono";
           };
       sansSerif = {
@@ -526,5 +527,5 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 }
