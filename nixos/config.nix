@@ -1,4 +1,4 @@
-{ config, pkgs, options, lib, inputs, system, pkgs-unstable, ... }:
+{ config, pkgs, options, lib, inputs, pkgs-unstable, ... }:
 let
   inherit (import ../variables.nix) host username;
 in
@@ -13,6 +13,15 @@ in
     ../modules/keyboard.nix
     ../modules/boot
   ];
+
+  # stylix.targets.gnome.enable = false;
+  # stylix.targets = {
+  #   gnome.enable = false;
+    
+  #   # Keep these enabled for basic theming
+  #   gtk.enable = true;
+  #   qt.enable = true;
+  # };
 
   # Styling Options
   stylix = {
@@ -43,9 +52,9 @@ in
     cursor.size = 24;
     fonts = {
       monospace = {
-        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
-        name = "JetBrainsMono Nerd Font Mono";
-      };
+            package = pkgs.nerd-fonts.jetbrains-mono;  # Updated to new format
+            name = "JetBrainsMono Nerd Font Mono";
+          };
       sansSerif = {
         package = pkgs.montserrat;
         name = "Montserrat";
@@ -184,7 +193,7 @@ in
       enableSSHSupport = true;
     };
     thunar = {
-      enable = true;
+      enable = false;
       plugins = with pkgs.xfce; [
         thunar-archive-plugin
         thunar-volman
@@ -198,13 +207,34 @@ in
     mutableUsers = true;
   };
 
+  # Essential sandboxing
+  security.chromiumSuidSandbox.enable = true;
+
+  # Virtualization
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+  users.extraGroups.vboxusers = {
+    members = [ username ];
+  };
+
+  # Docker
+  virtualisation.docker.enable = true;
+  users.extraGroups.docker.members = [ username ];
+  virtualisation.docker.rootless = {
+  enable = true;
+  setSocketVariable = true;
+  };
+
+
   environment.systemPackages = with pkgs; [
     # (import ../modules/zen-browser {inherit pkgs-unstable; })
     (import ../modules/zen-browser.nix {inherit pkgs-unstable; })
+    pcmanfm
+
     # System Utitlities
+    gsimplecal
     overskride
-    iwgtk
-    impala
+    thunar
     greetd.tuigreet
     hyprcursor
     hyprcursor
@@ -246,28 +276,23 @@ in
     htop
     ranger
     wget
-    rsync
     unzip
     unrar
     zip
     ripgrep
     tree
     cmatrix
-    cowsay
     eza
     lolcat
     bat
     tree
-    yad
     grim
 
     # Applications
     # mullvad-vpn
     ferdium
     swappy
-    appimage-run 
-    firefox
-    qutebrowser
+    chromium
     remmina
     file-roller
     wpsoffice
@@ -277,23 +302,26 @@ in
     playerctl
 
     # Audio and Videa
-    yt-dlp
     pavucontrol
     mpv
     v4l-utils
     ffmpeg
     imv
-    gimp
 
     # VPN
-    tailscale
+    protonvpn-gui
+    protonvpn-cli
+
+    # Misc
+    discord
+    zoom-us
   ];
 
   fonts = {
     packages = with pkgs; [
       noto-fonts-emoji
       noto-fonts-cjk-sans
-      nerd-font-patcher
+      nerd-fonts.jetbrains-mono
       font-awesome
       symbola
       material-icons
@@ -323,6 +351,10 @@ in
 
   # Services to start
   services = {
+    # gnome.desktop = {
+    #   enable = true; # Disable GNOME Desktop Environment
+    # };
+    # desktopManager.gnome.enable = true;
     displayManager.defaultSession = "hyprland";
     xserver = {
       enable = false;
@@ -386,12 +418,12 @@ in
       };
     };
   };
-  systemd.services.flatpak-repo = {
-    path = [ pkgs.flatpak ];
-    script = ''
-      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    '';
-  };
+  # systemd.services.flatpak-repo = {
+  #   path = [ pkgs.flatpak ];
+  #   script = ''
+  #     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  #   '';
+  # };
   hardware.sane = {
     enable = true;
     extraBackends = [ pkgs.sane-airscan ];
@@ -471,19 +503,19 @@ in
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # networking.firewall = {
-  #   # enable the firewall
-  #   enable = true;
+  networking.firewall = {
+    # enable the firewall
+    enable = true;
 
-  #   # always allow traffic from your Tailscale network
-  #   trustedInterfaces = [ "mullvad" ];
+    # always allow traffic from your Tailscale network
+    trustedInterfaces = [ "proton0" ];
 
-  #   # allow the Tailscale UDP port through the firewall
-  #   allowedUDPPorts = [ config.services.tailscale.port ];
+    # allow the Tailscale UDP port through the firewall
+    allowedUDPPorts = [ ];
 
-  #   # allow you to SSH in over the public internet
-  #   allowedTCPPorts = [ 22 ];
-  # };
+    # allow you to SSH in over the public internet
+    allowedTCPPorts = [ 22 ];
+  };
   # services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
 
@@ -493,5 +525,5 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "25.05"; # Did you read the comment?
 }

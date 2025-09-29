@@ -26,10 +26,8 @@ with lib;
           "pulseaudio"
           "cpu"
           "memory"
-          "idle_inhibitor"
         ];
         modules-right = [
-          "custom/hyprbindings"
           "custom/notification"
           "custom/exit"
           "battery"
@@ -50,7 +48,8 @@ with lib;
         "clock" = {
           format = if clock24h == true then '' {:L%H:%M}'' else '' {:L%I:%M %p}'';
           tooltip = true;
-          tooltip-format = "<big>{:%A, %d.%B %Y }</big>\n<tt><small>{calendar}</small></tt>";
+          tooltip-format = "{:%A, %d %B %Y }\n<tt><small>{calendar}</small></tt>";
+          on-click = "gsimplecal --show"
         };
         "hyprland/window" = {
           max-length = 22;
@@ -120,7 +119,7 @@ with lib;
           tooltip = false;
           format = "";
           # exec = "rofi -show drun";
-          on-click = "sleep 0.1 && rofi-launcher";
+          on-click = "sleep 0.1 && wallsetter";
         };
         "custom/hyprbindings" = {
           tooltip = false;

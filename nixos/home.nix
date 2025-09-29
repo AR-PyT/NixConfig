@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   config,
   ...
 }:
@@ -10,7 +11,7 @@ in
   # Home Manager Settings
   home.username = "${username}";
   home.homeDirectory = "/home/${username}";
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
 
   # Import Program Configurations
   imports = [
@@ -62,6 +63,8 @@ in
     early_exit=true
     fill_shape=false
   '';
+  home.file.".config/nixpkgs/config.nix".text = ''
+  { allowUnfree = true; }'';
 
   # Install & Configure Git
   programs.git = {
@@ -96,8 +99,8 @@ in
   };
   qt = {
     enable = true;
-    style.name = "adwaita-dark";
-    platformTheme.name = "gtk3";
+    # style.name = "adwaita-dark";
+    # platformTheme.name = lib.mkDefault "gtk3";
   };
 
 
@@ -208,7 +211,7 @@ in
           hide_cursor = true;
           no_fade_in = false;
         };
-        background = [
+        background = lib.mkForce [
           {
             path = "/home/${username}/.config/lockscreen.jpg";
             blur_passes = 1;
@@ -227,7 +230,7 @@ in
             valign = "center";
           }
         ];
-        input-field = [
+        input-field = lib.mkForce [
           {
             size = "200, 50";
             position = "0, -80";
@@ -245,4 +248,6 @@ in
       };
     };
   };
+
+
 }
