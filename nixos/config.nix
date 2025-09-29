@@ -232,6 +232,7 @@ in
     pcmanfm
 
     # System Utitlities
+    firefox
     gsimplecal
     overskride
     xfce.thunar
