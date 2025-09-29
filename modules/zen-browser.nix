@@ -449,6 +449,7 @@ EOF
       # These values are used by `wrapFirefox`.
       # ref; `pkgs/applications/networking/browsers/firefox/wrapper.nix'
       binaryName = meta.mainProgram;
+      applicationName = "zen";
       inherit alsaSupport;
       inherit jackSupport;
       inherit pipewireSupport;
