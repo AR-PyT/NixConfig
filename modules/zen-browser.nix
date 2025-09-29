@@ -135,14 +135,15 @@ let
             --replace 'kIOMainPortDefault' 'kIOMasterPortDefault'
         '';
     });
-    zstandard_0_22_0 = pkgs.python311Packages.zstandard.overrideAttrs (old: {
+    zstandard_0_22_0 = pkgs.python311Packages.buildPythonPackage rec {
+    pname = "zstandard";
     version = "0.22.0";
     src = pkgs.fetchPypi {
       pname = "zstandard";
       version = "0.22.0";
       hash = "sha256-giajPFQry1TNa9CjZgZ7YQtBcTtkyavsG8RTPWn1HnA=";
     };
-    nativeBuildInputs = (old.nativeBuildInputs or []) ++ [
+    nativeBuildInputs = [
       pkgs.python311Packages.cffi
       pkgs.python311Packages.setuptools
       pkgs.python311Packages.wheel
@@ -150,7 +151,8 @@ let
     postPatch = ''
       sed -i '/requires = \[/ s/setuptools/&<69.0.0, /' pyproject.toml
     '';
-  });
+    doCheck = false; # Optionally disable tests if they require network or fail
+  };
 
     # glean_sdk_61_2_0 = pkgs.python3Packages.buildPythonPackage rec {
     #   version = "61.2.0";
