@@ -234,8 +234,8 @@ with lib;
 
         # Keybindings for usage
         bind = $mainMod, T, exec, kitty
-        bind = $mainMod, B, exec, firefox
-        bind = $mainMod SHIFT, B, exec, qutebrowser
+        bind = $mainMod, B, exec, zen
+        bind = $mainMod SHIFT, B, exec, chromium
         bind = $mainMod, R, exec, rofi-launcher
         bind = $mainMod SHIFT, D, exec, discord
         bind = $mainMod, L, exec, hyprlock
