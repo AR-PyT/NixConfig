@@ -186,7 +186,7 @@ in
       };
     };
     dconf.enable = true;
-    seahorse.enable = true;
+    seahorse.enable = false;
     fuse.userAllowOther = true;
     mtr.enable = true;
     gnupg.agent = {
@@ -317,6 +317,9 @@ in
     # Misc
     discord
     zoom-us
+    libvncserver
+    turbovnc
+    tailscale
   ];
 
   fonts = {
@@ -351,16 +354,29 @@ in
     config.common.default = "hyprland";
   };
 
+  # systemd.targets.sleep.enable = false;
+  # systemd.targets.suspend.enable = false;
+  # systemd.targets.hibernate.enable = false;
+  # systemd.targets.hybrid-sleep.enable = false;
   # Services to start
   services = {
+    power-profiles-daemon.enable = false;
     # gnome.desktop = {
     #   enable = true; # Disable GNOME Desktop Environment
     # };
     # desktopManager.gnome.enable = true;
     displayManager.defaultSession = "hyprland";
+    # x2goserver.enable = true;
     xserver = {
       enable = false;
+      # displayManager.sddm.enable = true;
+      # desktopManager.plasma5.enable = true;
     };
+    # xrdp = {
+    #   enable = true;
+    #   defaultWindowManager = "startplasma-x11";
+    #   openFirewall = true;
+    # };
     greetd = {
       enable = true;
       vt = 3;
@@ -382,7 +398,15 @@ in
     libinput.enable = true;
     fstrim.enable = true;
     gvfs.enable = true;
-    openssh.enable = true;
+    # openssh = {
+    #   enable = true;
+    #   # ports = [ 6523 ];
+    #   settings = {
+    #     PasswordAuthentication = false;
+    #     PermitRootLogin = "no";
+    #     AllowUsers = [ "abdul" ];
+    #   };
+    # };
     flatpak.enable = false;
     printing = {
       enable = true;
@@ -412,6 +436,7 @@ in
     rpcbind.enable = false;
     nfs.server.enable = false;
     geoclue2.enable = true;
+    tailscale.enable = true;
     tlp = {
      enable = true;
       settings = {
@@ -508,16 +533,17 @@ in
   networking.firewall = {
     # enable the firewall
     enable = true;
-
+    checkReversePath = "loose"; # Important for reliable connectivity
     # always allow traffic from your Tailscale network
-    trustedInterfaces = [ "proton0" ];
+    trustedInterfaces = [ "proton0" "tailscale0" ];
 
     # allow the Tailscale UDP port through the firewall
-    allowedUDPPorts = [ ];
+    allowedUDPPorts = [ config.services.tailscale.port ];
 
     # allow you to SSH in over the public internet
     allowedTCPPorts = [ 22 ];
   };
+
   # services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
 

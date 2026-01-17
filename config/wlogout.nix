@@ -36,7 +36,7 @@
       }
       {
         "label" = "hibernate";
-        "action" = "sleep 1; hyprlock; systemctl hibernate";
+        "action" = "sleep 1; systemctl hibernate; hyprlock";
         "text" = "Hibernate";
         "keybind" = "h";
       }
