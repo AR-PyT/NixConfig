@@ -1,4 +1,4 @@
-{ lib, pkgs, unstable,  ... }:
+{ lib, pkgs, unstable, ... }:
 let
   plymouth_theme = pkgs.stdenv.mkDerivation {
     pname = "PlymouthTheme";
@@ -62,7 +62,7 @@ in
       device = "nodev";
       efiSupport = true;
       useOSProber = true;
-      configurationLimit = 5;  # Limit NIXOS configs
+      configurationLimit = 5; # Limit NIXOS configs
 
       theme = lib.mkForce dynamic_grub_theme;
       extraConfig = ''
@@ -78,9 +78,7 @@ in
     systemd-boot.enable = false;
   };
 
-  boot.consoleLogLevel = 3;  # Show logs with level >= 3 (default 4)
-  boot.initrd.systemd.enable = true;  # Enable systemd (needed for plymouth with nvidia)
-  boot.initrd.availableKernelModules = [ "i915" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+  boot.initrd.systemd.enable = true; # Enable systemd (needed for plymouth with nvidia)
   boot.plymouth = {
     enable = true;
     font = "${pkgs.jetbrains-mono}/share/fonts/truetype/JetBrainsMono-Regular.ttf";

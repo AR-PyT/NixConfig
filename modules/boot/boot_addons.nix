@@ -2,19 +2,15 @@
 
 {
   boot = {
-# Make /tmp a tmpfs
+    # Make /tmp a tmpfs
     tmp = {
       cleanOnBoot = true;
       tmpfsSize = "5GB";
     };
-    # Appimage Support
-    binfmt.registrations.appimage = {
-      wrapInterpreterInShell = false;
-      interpreter = "${pkgs.appimage-run}/bin/appimage-run";
-      recognitionType = "magic";
-      offset = 0;
-      mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
-      magicOrExtension = ''\x7fELF....AI\x02'';
-    };
+
+    boot.initrd.availableKernelModules = [ "i915" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+    consoleLogLevel = 0;
   };
+  # To avoid systemd services hanging on shutdown
+  systemd.settings.Manager = { DefaultTimeoutStopSec = "10s"; };
 }
