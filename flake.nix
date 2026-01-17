@@ -1,18 +1,21 @@
 {
-  description = "General NIXOS for hyprland configuration v2.1";
+  description = "General NIXOS for hyprland configuration v3.0";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    stylix.url = "github:nix-community/stylix/release-25.05";
-
-    # base16-nix.url = "github:SenchoPens/base16.nix";
-    # base16-nix.flake = false;
-    # stylix.inputs.base16.follows = "base16-nix";
-    fine-cmdline = {
-      url = "github:VonHeikemen/fine-cmdline.nvim";
-      flake = false;
+    stylix.url = "github:danth/stylix";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs = {
+        # IMPORTANT: we're using "libgbm" and is only available in unstable so ensure
+        # to have it up-to-date or simply don't specify the nixpkgs input
+        nixpkgs.follows = "nixpkgs-unstable";
+        home-manager.follows = "home-manager";
+      };
     };
   };
 
@@ -28,14 +31,15 @@
         "${host}" = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit (nixpkgs) lib;
-	          inherit system;
+            inherit system;
             inherit inputs;
             inherit pkgs-unstable;
           };
           modules = [
             ./${host}/config.nix
             inputs.stylix.nixosModules.stylix
-            home-manager.nixosModules.home-manager {
+            home-manager.nixosModules.home-manager
+            {
               home-manager.extraSpecialArgs = {
                 inherit inputs;
               };
