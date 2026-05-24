@@ -15,6 +15,9 @@ in
         "scanner"
         "lp"
         "audio"
+        "docker"
+        "vboxusers"
+        "kvm"
       ];
       shell = pkgs.fish;
       ignoreShellProgramCheck = true;

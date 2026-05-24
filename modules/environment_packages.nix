@@ -2,9 +2,9 @@
 {
   environment.systemPackages = with pkgs; [
     # System Utilities
-    xfce.thunar
     gsimplecal
     cliphist
+    wl-clipboard
     brightnessctl
     usbutils
     lshw
@@ -12,11 +12,7 @@
     libnotify
 
     # Development Tools
-    python311
-    python311.withPackages
-    (ps: with ps; [
-      jupyter
-    ])
+    python313
     gcc
     clang
     cmake
@@ -25,7 +21,6 @@
     nix-tree
     vscode
     ninja
-    texliveFull
 
     # Terminal Utilities
     kitty
@@ -50,15 +45,12 @@
     chromium
     firefox
     remmina
-    file-roller
     wpsoffice
-    swaynotificationcenter
     neovide
     slurp
+    swaylock
 
     discord
     zoom-us
   ];
-
-  
 }

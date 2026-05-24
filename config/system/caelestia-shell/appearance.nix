@@ -3,7 +3,7 @@
 , ...
 }:
 let
-  rounding = config.theme.rounding + config.theme.gaps-out;
+  rounding = 10 + 10;
   inherit (config.stylix) fonts;
 in
 {

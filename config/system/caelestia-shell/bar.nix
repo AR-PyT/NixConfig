@@ -21,7 +21,7 @@
       occupiedBg = true;
       occupiedLabel = "󰪥 ";
       rounded = true;
-      showWindows = false;
+      showWindows = true;
       shown = 5;
       showWindowsOnSpecialWorkspaces = false;
     };

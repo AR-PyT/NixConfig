@@ -63,7 +63,7 @@ in
       exec-once = [
         "dbus-update-activation-environment --systemd --all &"
         "systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "killall -q swww;sleep .5 && swww init"
+        "killall -q swww;sleep .5 && swww-daemon &"
         "sleep 1.5 && wallsetter"
 
         "[workspace special:utils silent] blueman-manager"
@@ -75,27 +75,16 @@ in
       ];
 
       env = [
-        "XDG_CURRENT_DESKTOP,Hyprland"
-        "MOZ_ENABLE_WAYLAND,1"
-        "ANKI_WAYLAND,1"
-        "DISABLE_QT5_COMPAT,0"
-        "NIXOS_OZONE_WL,1"
-        "XDG_SESSION_TYPE,wayland"
-        "XDG_SESSION_DESKTOP,Hyprland"
-        "QT_AUTO_SCREEN_SCALE_FACTOR,1"
-        "QT_QPA_PLATFORM=wayland,xcb"
-        "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
-        "ELECTRON_OZONE_PLATFORM_HINT,auto"
-        "__GL_GSYNC_ALLOWED,0"
-        "__GL_VRR_ALLOWED,0"
-        "DISABLE_QT5_COMPAT,0"
-        "DIRENV_LOG_FORMAT,"
-        "WLR_DRM_NO_ATOMIC,1"
-        "WLR_BACKEND,vulkan"
-        "WLR_RENDERER,vulkan"
-        "WLR_NO_HARDWARE_CURSORS,1"
-        "SDL_VIDEODRIVER,wayland"
-        "CLUTTER_BACKEND,wayland"
+        "XDG_CURRENT_DESKTOP, Hyprland"
+        "XDG_SESSION_TYPE, wayland"
+        "XDG_SESSION_DESKTOP, Hyprland"
+        "GDK_BACKEND, wayland, x11"
+        "CLUTTER_BACKEND, wayland"
+        "QT_QPA_PLATFORM=wayland;xcb"
+        "QT_WAYLAND_DISABLE_WINDOWDECORATION, 1"
+        "QT_AUTO_SCREEN_SCALE_FACTOR, 1"
+        "SDL_VIDEODRIVER, x11"
+        "MOZ_ENABLE_WAYLAND, 1"
       ];
 
       general = {
@@ -134,30 +123,32 @@ in
         smart_split = true;
       };
 
-      gestures = {
-        workspace_swipe = true;
-        workspace_swipe_fingers = 3;
-        workspace_swipe_forever = true;
-      };
+      gesture = [
+        "3, horizontal, workspace, workspace_swipe: true, workspace_swipe_forever: true"
+        "3, down, dispatcher, exec, caelestia shell drawers toggle dashboard"
+        "3, up, dispatcher, exec, caelestia shell drawers toggle dashboard"
+      ];
 
       windowrule = [
         "match:class protonvpn-app, float on"
         "match:class protonvpn-app, center on"
         "match:class protonvpn-app, size 500 400"
 
-        "float, swayimg|vlc|Viewnior|pavucontrol|zoom|mpv|nm-connection-editor|blueman-manager"
-        "opacity 1.0 0.8, class:^(kitty)$"
-        "opacity 0.95 0.8, class:^(firefox)$"
-        "opacity 0.9 0.7, class:^(thunar)$"
+        "match:class swayimg|vlc|Viewnior|pavucontrol|zoom|mpv|nm-connection-editor|blueman-manager, float on"
+        "match:class ^(kitty)$, opacity 1.0 0.8"
+        "match:class ^(firefox)$, opacity 0.95 0.8"
+        "match:class ^(thunar)$, opacity 0.9 0.7"
       ];
 
       misc = {
         disable_hyprland_logo = true;
-        background_color = "0x24273a";
+        background_color = lib.mkDefault "0x24273a";
         initial_workspace_tracking = 0;
         mouse_move_enables_dpms = true;
         key_press_enables_dpms = false;
       };
+      workspace_swipe_forever = true;
+      workspace_swipe_create_new = true;
 
       input = {
         kb_layout = "us";

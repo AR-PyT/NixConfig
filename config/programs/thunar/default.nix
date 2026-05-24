@@ -6,29 +6,15 @@
 }: {
   # ctrl + m to toggle the menubar
   home.packages = with pkgs; [
-    thunar
-    xfconf
-    tumbler
-    thunar-archive-plugin
-    thunar-volman
-    thunar-media-tags-plugin
+    xfce.thunar
+    xfce.xfconf
+    xfce.tumbler
+    xfce.thunar-archive-plugin
+    xfce.thunar-volman
+    xfce.thunar-media-tags-plugin
     p7zip
     xarchiver
   ];
-
-  gtk = {
-    iconTheme = {
-      name = "WhiteSur";
-      package = pkgs.whitesur-icon-theme.override {
-        boldPanelIcons = true;
-        alternativeIcons = true;
-      };
-    };
-  };
-
-  home.sessionVariables = {
-    XDG_ICON_DIR = "${pkgs.whitesur-icon-theme}/share/icons/WhiteSur";
-  };
 
   # bookmarks for the side pane
   gtk.gtk3.bookmarks = [

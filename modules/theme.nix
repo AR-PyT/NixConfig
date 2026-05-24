@@ -56,10 +56,7 @@
     polarity = "dark";
     image = ../config/wallpapers/wp4.png;
     opacity = {
-      terminal = 0.8;
-      inactive = 0.7;
-      active = 0.9;
+      terminal = 0.9;
     };
-
   };
 }

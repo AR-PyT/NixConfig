@@ -13,7 +13,7 @@
     ];
     bind = [
       # Launcher
-      
+
       "$mod, X, global, caelestia:session" # Powermenu
 
 
@@ -29,7 +29,7 @@
     ];
     bindl = [
       # Brightness
-      
+
       "$mod, F2, exec, nightshift-toggle"
       "$mod, F3, exec, nightshift-toggle"
       # Utilities

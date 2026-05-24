@@ -10,7 +10,6 @@
     enable = true;
     generateCompletions = true;
     interactiveShellInit = ''
-      fastfetch
     '';
     shellAliases = {
       sv = "sudo nvim";
@@ -21,6 +20,7 @@
       ll = "eza -lh --icons --grid --group-directories-first";
       la = "eza -lah --icons --grid --group-directories-first";
       ".." = "cd ..";
+      slp = "hibernate-session";
     };
   };
 }

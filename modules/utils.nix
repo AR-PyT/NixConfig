@@ -22,7 +22,7 @@
     };
     gvfs.enable = true;
     upower.enable = true;
-    power-profiles-daemon.enable = true;
+    power-profiles-daemon.enable = false;
     udisks2.enable = true;
     ipp-usb.enable = true;
     geoclue2.enable = true;
@@ -34,8 +34,8 @@
       };
     };
     xserver = {
-      enable = false;
-      layout = "us";
+      enable = true;
+      xkb.layout = "us";
     };
     psd = {
       enable = false;

@@ -4,7 +4,7 @@
   configPath = "/home/abdul/NixConfig/config";
   host = "nixos";
   username = "abdul";
-  
+
   # Hyprland Settings
   extraMonitorSettings = "";
 

@@ -16,7 +16,11 @@
     enable = true;
     systemd.enable = false;
     settings = {
+      osd.enabled = false;
       services.weatherLocation = "Hong Kong";
+      services.useFahrenheit = false;
+      dashboard.showOnHover = false;
+      background.enable = false;
       general = {
         apps = {
           terminal = [ "ghostty" ];
@@ -45,12 +49,6 @@
 
   home.packages = with pkgs; [
     gpu-screen-recorder
-  ];
-
-  wayland.windowManager.hyprland.settings.exec-once = [
-    "uwsm app -- caelestia resizer -d"
-    "uwsm app -- caelestia shell -d"
-    "caelestia scheme set -n custom"
   ];
 
   services.cliphist = {

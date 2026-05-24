@@ -1,8 +1,7 @@
 # Hyprland is a dynamic tiling Wayland compositor.
-{
-  inputs,
-  pkgs,
-  ...
+{ inputs
+, pkgs
+, ...
 }: {
   programs.hyprland = {
     enable = true;

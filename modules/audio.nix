@@ -1,4 +1,5 @@
 # Audio configuration for NixOS using PipeWire
+{ pkgs, ... }:
 {
   security.rtkit.enable = true;
   services.pulseaudio.enable = false;
@@ -22,7 +23,6 @@
   environment.systemPackages = with pkgs; [
     pavucontrol
     pipewire
-    pipewire-pulse
     pamixer
     playerctl
     mpv

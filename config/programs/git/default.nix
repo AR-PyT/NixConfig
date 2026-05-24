@@ -1,7 +1,7 @@
 # Git configuration
 { config, ... }:
 let
-  inherit (import ../../variables.nix) gitUsername gitEmail;
+  inherit (import ../../../variables.nix) gitUsername gitEmail;
 in
 {
   programs.git = {

@@ -6,12 +6,9 @@
     xkb.options = "terminate:ctrl_alt_bksp";
   };
 
+  # Power Button Setting
+  services.logind.settings.Login.HandlePowerKey = "ignore";
   services.kanata = {
-    # Power Button Setting
-    logind.extraConfig = ''
-      HandlePowerKey=ignore
-    '';
-
     enable = true;
     keyboards = {
       internalKeyboard = {

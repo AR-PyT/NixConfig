@@ -3,9 +3,6 @@
 , inputs
 , ...
 }:
-let
-  autoGarbageCollector = config.var.autoGarbageCollector;
-in
 {
   nixpkgs.config = {
     allowUnfree = true;
@@ -36,7 +33,7 @@ in
       ];
     };
     gc = {
-      automatic = autoGarbageCollector;
+      automatic = true;
       persistent = true;
       dates = "weekly";
       options = "--delete-older-than 7d";

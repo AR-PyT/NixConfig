@@ -1,4 +1,4 @@
-{ config, pkgs, host, ... }:
+{ config, pkgs, options, host, ... }:
 {
   networking = {
     networkmanager.enable = true;
@@ -11,6 +11,7 @@
       allowedTCPPorts = [ ];
       allowedUDPPorts = [ config.services.tailscale.port ];
     };
+    nftables.enable = true;
   };
   # Set your time zone.
   time.timeZone = "Asia/Hong_Kong";
@@ -41,7 +42,6 @@
 
   environment.systemPackages = with pkgs; [
     protonvpn-gui
-    protonvpn-cli
     tailscale
   ];
 }

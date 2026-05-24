@@ -1,50 +1,28 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
+{ pkgs
+, lib
+, config
+, username
+, host
+, ...
 }:
 let
-  inherit (import ../variables.nix) gitUsername gitEmail configPath host username;
+  inherit (import ../variables.nix) gitUsername gitEmail configPath;
 in
 {
   # Home Manager Settings
   home.username = "${username}";
   home.homeDirectory = "/home/${username}";
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 
   # Import Program Configurations
   imports = [
-    ../config/hyprland.nix
-    ../config/neovim.nix
-    ../config/rofi/rofi.nix
-    ../config/rofi/config-long.nix
-    ../config/swaync.nix
-    ../config/waybar.nix
-    ../config/wlogout.nix
-    ../config/fastfetch
+    ../config/programs
+    ../config/system
   ];
-
-  # home.file = {
-  #   ".config/emoji" = {
-  #     source = config.lib.file.mkOutOfStoreSymlink "${configPath}/emoji";
-  #   };
-  #   ".config/hypr/macchiato.conf" = {
-  #     source = config.lib.file.mkOutOfStoreSymlink "${configPath}/hypr/macchiato.conf";
-  #   };
-  #   ".config/fish" = {
-  #     source = config.lib.file.mkOutOfStoreSymlink "${configPath}/fish";
-  #     recursive = true;
-  #   };
-  # };
 
   # Place Files Inside Home Directory
   home.file."Pictures/Wallpapers" = {
     source = ../config/wallpapers;
-    recursive = true;
-  };
-  home.file.".config/wlogout/icons" = {
-    source = ../config/wlogout;
     recursive = true;
   };
   home.file.".config/lockscreen.jpg".source = ../config/wp1.jpg;
@@ -64,14 +42,8 @@ in
     fill_shape=false
   '';
   home.file.".config/nixpkgs/config.nix".text = ''
-  { allowUnfree = true; }'';
+    { allowUnfree = true; }'';
 
-  # Install & Configure Git
-  programs.git = {
-    enable = true;
-    userName = "${gitUsername}";
-    userEmail = "${gitEmail}";
-  };
 
   # Create XDG Dirs
   xdg = {
@@ -82,27 +54,32 @@ in
   };
 
   # Styling Options
-  stylix.targets.waybar.enable = false;
-  stylix.targets.rofi.enable = false;
-  stylix.targets.hyprland.enable = false;
-  gtk = {
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-    gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
-    };
-    gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
-    };
-  };
-  qt = {
-    enable = true;
-    # style.name = "adwaita-dark";
-    # platformTheme.name = lib.mkDefault "gtk3";
-  };
-
+  stylix.targets.gnome.enable = true;
+  stylix.targets.gtk.enable = true;
+  # gtk = {
+  #   enable = lib.mkForce false;
+  #   theme.name = lib.mkForce "Adwaita-dark";
+  #   theme.package = lib.mkForce pkgs.gnome-themes-extra;
+  #   iconTheme = {
+  #     name = "Papirus-Dark";
+  #     package = pkgs.papirus-icon-theme;
+  #   };
+  #   gtk3.extraConfig = {
+  #     gtk-application-prefer-dark-theme = 1;
+  #   };
+  #   gtk4.extraConfig = {
+  #     gtk-application-prefer-dark-theme = 1;
+  #   };
+  # };
+  # qt = {
+  #   enable = true;
+  #   platformTheme = lib.mkDefault "gtk";
+  #   style.name = lib.mkDefault "Adwaita-dark";
+  # };
+  # home.sessionVariables = {
+  #   GTK_THEME = "Adwaita:dark";
+  #   XDG_ICON_DIR = "${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark";
+  # };
 
   # Scripts
   home.packages = [
@@ -124,32 +101,14 @@ in
     (import ../scripts/wayland-statusbar-toggle.nix { inherit pkgs; })
     (import ../scripts/web-search.nix { inherit pkgs; })
     (import ../scripts/wifi-toggle.nix { inherit pkgs; })
+    (import ../scripts/hibernate-session.nix { inherit pkgs; })
+    (import ../scripts/lock-session.nix { inherit pkgs; })
+
+    pkgs.papirus-icon-theme
   ];
 
-  services = {
-    hypridle = {
-      settings = {
-        general = {
-          after_sleep_cmd = "hyprctl dispatch dpms on";
-          ignore_dbus_inhibit = false;
-          lock_cmd = "hyprlock";
-          };
-        listener = [
-          {
-            timeout = 900;
-            on-timeout = "hyprlock";
-          }
-          {
-            timeout = 1200;
-            on-timeout = "hyprctl dispatch dpms off";
-            on-resume = "hyprctl dispatch dpms on";
-          }
-        ];
-      };
-    };
-  };
-
   programs = {
+    firefox.enable = true;
     gh.enable = true;
     btop = {
       enable = true;
@@ -177,77 +136,7 @@ in
         # background_tint 0.9
       '';
     };
-    starship = {
-      enable = true;
-      package = pkgs.starship;
-    };
-    fish = {
-      enable = true;
-      interactiveShellInit = ''
-        fastfetch
-      '';
-      shellAliases = {
-        sv = "sudo nvim";
-        ns = "nix-shell";
-        v = "nvim";
-        cat = "bat";
-        ls = "eza --icons";
-        ll = "eza -lh --icons --grid --group-directories-first";
-        la = "eza -lah --icons --grid --group-directories-first";
-        ".." = "cd ..";
-      };
-    };
-    bash = {
-      enable = true;
-      enableCompletion = true;
-    };
     home-manager.enable = true;
-    hyprlock = {
-      enable = true;
-      settings = {
-        general = {
-          disable_loading_bar = true;
-          grace = 5;
-          hide_cursor = true;
-          no_fade_in = false;
-        };
-        background = lib.mkForce [
-          {
-            path = "/home/${username}/.config/lockscreen.jpg";
-            blur_passes = 1;
-            blur_size = 1;
-          }
-        ];
-        image = [
-          {
-            path = "/home/${username}/.config/face.jpg";
-            size = 150;
-            border_size = 4;
-            border_color = "rgb(0C96F9)";
-            rounding = -1; # Negative means circle
-            position = "0, 200";
-            halign = "center";
-            valign = "center";
-          }
-        ];
-        input-field = lib.mkForce [
-          {
-            size = "200, 50";
-            position = "0, -80";
-            monitor = "";
-            dots_center = true;
-            fade_on_empty = false;
-            font_color = "rgb(CFE6F4)";
-            inner_color = "rgb(657DC2)";
-            outer_color = "rgb(0D0E15)";
-            outline_thickness = 5;
-            placeholder_text = "Password...";
-            shadow_passes = 2;
-          }
-        ];
-      };
-    };
+
   };
-
-
 }

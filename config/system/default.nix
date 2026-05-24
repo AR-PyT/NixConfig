@@ -1,9 +1,9 @@
 { ... }:
 {
-    imports = [
-        ./hyprland
-        ./caelestia-shell
-        ./mime
-        ./udiskie
-    ];
+  imports = [
+    ./hyprland
+    ./caelestia-shell
+    ./mime
+    ./udiskie
+  ];
 }
