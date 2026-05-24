@@ -5,7 +5,6 @@
     ./ghostty
     ./git
     ./shell
-    ./nvf
     ./thunar
   ];
 }

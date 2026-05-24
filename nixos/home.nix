@@ -1,12 +1,10 @@
 { pkgs
 , lib
 , config
-, username
-, host
 , ...
 }:
 let
-  inherit (import ../variables.nix) gitUsername gitEmail configPath;
+  inherit (import ../variables.nix) gitUsername gitEmail configPath host username;
 in
 {
   # Home Manager Settings
@@ -53,9 +51,6 @@ in
     };
   };
 
-  # Styling Options
-  stylix.targets.gnome.enable = true;
-  stylix.targets.gtk.enable = true;
   # gtk = {
   #   enable = lib.mkForce false;
   #   theme.name = lib.mkForce "Adwaita-dark";

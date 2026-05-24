@@ -4,9 +4,9 @@
 , ...
 }:
 let
-  accent = "#" + config.lib.stylix.colors.base0D;
-  foreground = "#" + config.lib.stylix.colors.base05;
-  muted = "#" + config.lib.stylix.colors.base03;
+  accent = "#1e8bac";
+  foreground = "#d5d5d5";
+  muted = "#6f7579";
 in
 {
   programs.fzf = {

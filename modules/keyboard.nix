@@ -1,13 +1,9 @@
 { pkgs, ... }:
 
 {
-  services.xserver = {
-    xkb.layout = "us";
-    xkb.options = "terminate:ctrl_alt_bksp";
-  };
-
   # Power Button Setting
   services.logind.settings.Login.HandlePowerKey = "ignore";
+  
   services.kanata = {
     enable = true;
     keyboards = {

@@ -1,4 +1,3 @@
-# Hyprland is a dynamic tiling Wayland compositor.
 { inputs
 , pkgs
 , ...

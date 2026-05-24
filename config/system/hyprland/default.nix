@@ -13,7 +13,7 @@ let
   rounding = 10;
   blur = true;
   keyboardLayout = "us";
-  background = "rgba(" + config.lib.stylix.colors.base00 + "77)";
+  background = "rgba(c1d202177)";
 in
 {
   imports = [

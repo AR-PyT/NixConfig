@@ -22,12 +22,7 @@
 
   environment.systemPackages = with pkgs; [
     pavucontrol
-    pipewire
     pamixer
     playerctl
-    mpv
-    ffmpeg
-    imv
-    v4l-utils
   ];
 }

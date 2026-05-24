@@ -1,7 +1,10 @@
 { pkgs
-, username
 , ...
-}: {
+}: 
+let
+  inherit (import ../variables.nix) host username;
+in
+{
   services.greetd = {
     enable = true;
     settings = {

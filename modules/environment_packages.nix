@@ -1,55 +1,50 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    # System Utilities
-    gsimplecal
+    # System
     cliphist
     wl-clipboard
     brightnessctl
-    usbutils
-    lshw
     killall
     libnotify
 
-    # Development Tools
+    # Dev
     python313
     gcc
-    clang
     cmake
     git
     neovim
     nix-tree
-    vscode
     ninja
 
-    # Terminal Utilities
+    # Terminal
     kitty
     fish
     btop
-    htop
     ranger
     wget
     unzip
-    unrar
     zip
     ripgrep
     tree
-    cmatrix
     eza
-    lolcat
     bat
-    tree
     grim
+    slurp
+    fzf
+    fd
+    jq
+    rsync
+    ncdu
+    tldr
 
+    # GUI
     swappy
     chromium
-    firefox
-    remmina
     wpsoffice
     neovide
-    slurp
     swaylock
 
+    # Comm
     discord
     zoom-us
   ];

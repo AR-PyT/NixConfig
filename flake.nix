@@ -1,16 +1,13 @@
 {
-  description = "General NIXOS for hyprland configuration v3.0";
+  description = "General NIXOS for hyprland configuration v4.0";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    stylix = {
-      url = "github:danth/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     # zen-browser = {
     #   url = "github:0xc000022070/zen-browser-flake";
     #   inputs = {
@@ -29,17 +26,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    nvf.url = "github:notashelf/nvf";
+    # nvf.url = "github:notashelf/nvf";
 
-    nixpkgs-waydroid.url = "github:NixOS/nixpkgs/pull/455257/head";
+    # nixpkgs-waydroid.url = "github:NixOS/nixpkgs/pull/455257/head";
   };
 
   outputs =
-    { nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
+    { nixpkgs, unstable, home-manager, ... } @ inputs:
     let
       system = "x86_64-linux";
       inherit (import ./variables.nix) host username;
-      pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; };
     in
     {
       nixosConfigurations = {
@@ -48,19 +44,13 @@
             inherit (nixpkgs) lib;
             inherit system;
             inherit inputs;
-            inherit username;
-            inherit host;
-            inherit pkgs-unstable;
           };
           modules = [
             ./${host}/config.nix
-            inputs.stylix.nixosModules.stylix
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = {
                 inherit inputs;
-                inherit host;
-                inherit username;
               };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;

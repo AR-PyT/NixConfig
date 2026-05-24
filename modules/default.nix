@@ -4,7 +4,6 @@
     ./audio.nix
     ./bluetooth.nix
     ./display_manager.nix
-    ./environment_packages.nix
     ./fonts.nix
     ./hyprland.nix
     ./intel-drivers.nix
@@ -12,10 +11,10 @@
     ./networking.nix
     ./nix.nix
     ./nvidia.nix
-    ./theme.nix
     ./utils.nix
     ./virtualization.nix
-    ./waydroid.nix
     ./boot
+    
+    ./environment_packages.nix
   ];
 }

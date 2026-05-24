@@ -44,8 +44,6 @@ in
     };
   };
 
-
-
   # Enhanced graphics support
   hardware.graphics = {
     enable = true;

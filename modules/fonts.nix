@@ -2,23 +2,12 @@
 { pkgs, ... }: {
   fonts = {
     packages = with pkgs; [
-      roboto
-      work-sans
-      comic-neue
-      source-sans
-      comfortaa
-      inter
-      lato
-      lexend
-      jost
-      dejavu_fonts
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-color-emoji
-      nerd-fonts.fira-code
-      nerd-fonts.meslo-lg
-      openmoji-color
-      twemoji-color-font
+      noto-fonts              # Base Noto: massive Unicode coverage for Latin/Greek/Cyrillic
+      noto-fonts-cjk-sans     # Chinese/Japanese/Korean
+      noto-fonts-color-emoji  # Emoji support (system default)
+      nerd-fonts.fira-code    # Terminal font with icons
+      nerd-fonts.meslo-lg     # Alternative terminal font
+      dejavu_fonts            # Fallback font, good metric compatibility
     ];
 
     enableDefaultPackages = false;

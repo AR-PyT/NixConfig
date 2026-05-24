@@ -1,9 +1,10 @@
 # Thunar is a file explorer
 { pkgs
 , config
-, username
 , ...
-}: {
+}: 
+let inherit (import ../../../variables.nix) username; in
+{
   # ctrl + m to toggle the menubar
   home.packages = with pkgs; [
     xfce.thunar

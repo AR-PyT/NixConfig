@@ -4,7 +4,6 @@
 }:
 let
   rounding = 10 + 10;
-  inherit (config.stylix) fonts;
 in
 {
   home.packages = with pkgs; [
@@ -22,8 +21,8 @@ in
       };
       font.family = {
         material = "Material Symbols Rounded";
-        mono = fonts.monospace.name;
-        sans = fonts.sansSerif.name;
+        mono = "JetBrains Mono Nerd Font";
+        sans = "Source Sans Pro";
       };
     };
     utilities = {
